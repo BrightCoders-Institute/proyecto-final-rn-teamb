@@ -23,7 +23,7 @@ export const ListeningCard: React.FC<ListeningCardProps> = ({Name, Author}) => {
         <Text style={styles.textName}>{Name}</Text>
         <Text style={styles.textAuthor}>{Author}</Text>
       </View>
-      <Icon style={styles.icon} name="spotify" size={30} color="5FCDD9" />
+      <Icon style={styles.icon} name="spotify" size={30} color="#5FCDD9" />
     </View>
   );
 };
