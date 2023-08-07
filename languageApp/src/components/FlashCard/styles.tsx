@@ -7,8 +7,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 40,
+    marginBottom: 30,
   },
-
   face: {
     backgroundColor: '#012030',
     width: 335,
