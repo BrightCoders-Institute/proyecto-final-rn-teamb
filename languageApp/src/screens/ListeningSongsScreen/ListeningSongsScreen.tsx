@@ -1,13 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View, Text } from 'react-native';
 //components
-import {HeaderText} from '../../components/HeaderText/HeaderText';
-import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
-
-export const ListeningSongsScreen = () => {
+import { HeaderText } from '../../components/HeaderText/HeaderText';
+import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
+import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
+interface TokenViewProps {
+  accessToken: string | null;
+}
+export const ListeningSongsScreen = ({ accessToken }) => {
   return (
     <View>
+      <Text>Access Token: {accessToken}</Text>
       <HeaderText header={'Listening practice'} />
       <DescriptionText
         description={
