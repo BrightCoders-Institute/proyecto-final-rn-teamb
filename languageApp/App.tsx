@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import axios from 'axios';
 import { PodcastScreen } from './src/screens/PodcastScreen/PodcastScreen';
 import config from 'react-native-config'; // .env 
+import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/ListeningSongsScreen';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -35,6 +36,8 @@ const App: React.FC = () => {
   
   return (
     <View>
+     <PodcastScreen accessToken={accessToken}/> 
+     {/* <ListeningSongsScreen accessToken={accessToken}/> */}
     </View>
   );
 };

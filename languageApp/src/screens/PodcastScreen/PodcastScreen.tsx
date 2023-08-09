@@ -10,8 +10,8 @@ interface PodcastScreenProps {
 
 interface PodcastEpisode {
   name: string;
-  author: { name: string }[];
-  imageUri: { url: string }[];
+  publisher: string;
+  images: { url: string }[];
 }
 
 export const PodcastScreen: React.FC<PodcastScreenProps> = ({
@@ -20,23 +20,23 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
 
   const getRandomEpisodes = async (count: number) => {
+
     try {
       const token = accessToken;
       const episodes: PodcastEpisode[] = [];
-
+      console.log(`https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(1,100)}`)
       for (let i = 0; i < count; i++) {
         const response = await fetch(
-          `https://api.podcastplatform.com/v1/search?q=type=episode&limit=1`,
+          `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(1,100)}`,
           {
             method: 'GET',
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer  ${token}`,
             },
           }
-        );
+        )
         const data = await response.json();
-        const randomEpisode = data.episodes.items[0];
-        console.log("WORKED")
+        const randomEpisode = data.shows.items[0];
         episodes.push(randomEpisode);
       }
 
@@ -45,9 +45,18 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({
       console.error('Error fetching random episodes:', error);
     }
   };
-
+  const getRandomLetter = (): string => {
+    const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
+    const randomIndex: number = Math.floor(Math.random() * alphabet.length);
+    return alphabet[randomIndex];
+  };
+  
+  const getRandomNumber = (min: number, max: number): string => {
+    return (Math.floor(Math.random() * (max - min + 1)) + min).toString();
+  };
+  
   useEffect(() => {
-    getRandomEpisodes(3); // number of episodes to show
+    getRandomEpisodes(4); // number of episodes to show
   }, [accessToken]);
 
   return (
@@ -62,8 +71,8 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({
         <ListeningCard
           key={index}
           name={episode.name}
-          author={episode.author[0].name}
-          imageUri={episode.imageUri[0].url}
+          author={episode.publisher}
+          imageUri={episode.images[0].url}
         />
       ))}
     </View>
