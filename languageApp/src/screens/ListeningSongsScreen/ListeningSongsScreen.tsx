@@ -55,7 +55,6 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
 
   return (
     <View>
-      <Text>Access Token: {accessToken}</Text>
       <HeaderText header={'Listening practice'} />
       <DescriptionText
         description={
