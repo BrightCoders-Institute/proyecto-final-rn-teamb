@@ -4,10 +4,10 @@ import { View, Text } from 'react-native';
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
-interface TokenViewProps {
+interface ListeningSongsScreenProps {
   accessToken: string | null;
 }
-export const ListeningSongsScreen = ({ accessToken }) => {
+export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({ accessToken }) => {
   return (
     <View>
       <Text>Access Token: {accessToken}</Text>
