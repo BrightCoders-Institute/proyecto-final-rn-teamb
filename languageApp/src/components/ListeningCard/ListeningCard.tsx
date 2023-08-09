@@ -1,22 +1,21 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ListeningCardProps {
   name: String;
   author: String;
+  imageUri: string; 
 }
 
-export const ListeningCard: React.FC<ListeningCardProps> = ({name, author}) => {
+export const ListeningCard: React.FC<ListeningCardProps> = ({ name, author, imageUri }) => {
   return (
     <TouchableOpacity onPress={() => {}}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
-            source={{
-              uri: 'https://wrvu.org/wp-content/uploads/2020/10/113593586_swift.jpg ',
-            }}
+            source={{ uri: imageUri }}
             style={styles.image}
           />
         </View>
