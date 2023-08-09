@@ -38,7 +38,7 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({ acce
   useEffect(() => {
     getRandomSong();
   }, [accessToken]);
-  
+
   return (
     <View>
       <HeaderText header={'Listening practice'} />
@@ -47,10 +47,25 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({ acce
           'Listening to music is a fantastic way to learn new words and their pronunciation!'
         }
       />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
+      {randomSong && (
+        <ListeningCard
+          name={randomSong.name}
+          author={randomSong.artists[0].name}
+        />
+      )}
+      {randomSong && (
+        <ListeningCard
+          name={randomSong.name}
+          author={randomSong.artists[0].name}
+        />
+      )}
+      {randomSong && (
+        <ListeningCard
+          name={randomSong.name}
+          author={randomSong.artists[0].name}
+        />
+      )}
+
     </View>
   );
 };
