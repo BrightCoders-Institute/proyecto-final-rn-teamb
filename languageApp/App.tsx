@@ -16,7 +16,7 @@ const App: React.FC = () => {
   
         const response = await axios.post(
           'https://accounts.spotify.com/api/token',
-          requestData.toString(), // Convert the URLSearchParams object to a string
+          requestData.toString(),
           {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -36,7 +36,6 @@ const App: React.FC = () => {
   
   return (
     <View>
-     <ListeningSongsScreen accessToken={accessToken}/> 
     </View>
   );
 };
