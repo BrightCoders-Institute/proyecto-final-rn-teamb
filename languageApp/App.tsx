@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
   return (
     <View>
-     <ListeningSongsScreen/> 
+     <ListeningSongsScreen accessToken={accessToken}/> 
     </View>
   );
 };
