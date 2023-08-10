@@ -8,7 +8,7 @@ interface HeaderText {
 
 export const HeaderText: React.FC<HeaderText> = ({header}) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
     </View>
   );
