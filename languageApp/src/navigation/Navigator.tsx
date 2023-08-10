@@ -54,6 +54,7 @@ export const HomeScreenNavigator = () => {
         options={{
           headerTitle: '',
           headerTintColor: '#5FCDD9',
+          headerShadowVisible: false,
         }}
       />
     </Stack.Navigator>
