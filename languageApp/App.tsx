@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+//navigation
+
 import { View, Text, Button } from 'react-native';
 import axios from 'axios';
 import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/ListeningSongsScreen';
 
 const App: React.FC = () => {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState < string | null > (null);
 
   useEffect(() => {
     const fetchAccessToken = async () => {
@@ -13,7 +15,7 @@ const App: React.FC = () => {
         requestData.append('grant_type', 'client_credentials');
         requestData.append('client_id', 'aa882dee2f694376a697c2c105bbae84');
         requestData.append('client_secret', 'a00142e9d2e94a2190bd2cbd7c3dd475');
-  
+
         const response = await axios.post(
           'https://accounts.spotify.com/api/token',
           requestData.toString(),
@@ -23,20 +25,29 @@ const App: React.FC = () => {
             },
           }
         );
-  
+
         const token = response.data.access_token;
         setAccessToken(token);
       } catch (error) {
         console.error('Error fetching access token:', error);
       }
     };
-  
+
     fetchAccessToken();
   }, []);
-  
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'white',
+    },
+  };
   return (
-    <View>
-    </View>
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer theme={MyTheme}>
+        <BottomNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
