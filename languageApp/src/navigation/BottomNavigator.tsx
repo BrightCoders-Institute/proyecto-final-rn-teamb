@@ -6,7 +6,7 @@ import {
   HomeScreenNavigator,
   SettingsScreenNavigator,
 } from './Navigator';
-//Icons
+//icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
