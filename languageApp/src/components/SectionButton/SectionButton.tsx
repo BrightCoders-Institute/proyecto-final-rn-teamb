@@ -13,7 +13,7 @@ export const SectionButton: React.FC<SectionButtonProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.sectionButton} onPress={() => {}}>
+      <TouchableOpacity style={styles.sectionButton} onPress={onPress}>
         <Text style={styles.buttonText}>{title}</Text>
       </TouchableOpacity>
     </View>
