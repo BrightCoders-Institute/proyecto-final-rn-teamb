@@ -1,13 +1,12 @@
-
-import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 //navigation
-import { View, Text, Button } from 'react-native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {BottomNavigator} from './src/navigation/BottomNavigator';
+//axios
 import axios from 'axios';
-import { PodcastScreen } from './src/screens/PodcastScreen/PodcastScreen';
-import config from 'react-native-config'; // .env 
-import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/ListeningSongsScreen';
+// .env
+import config from 'react-native-config';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -18,7 +17,7 @@ const App: React.FC = () => {
         const requestData = new URLSearchParams();
         requestData.append('grant_type', 'client_credentials');
         requestData.append('client_id', config.CLIENT_ID!);
-        requestData.append('client_secret', config.CLIENT_SECRET!);        
+        requestData.append('client_secret', config.CLIENT_SECRET!);
         const response = await axios.post(
           config.API_URL!,
           requestData.toString(),
@@ -26,7 +25,7 @@ const App: React.FC = () => {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
-          }
+          },
         );
 
         const token = response.data.access_token;
@@ -46,7 +45,7 @@ const App: React.FC = () => {
     },
   };
   return (
-    <SafeAreaProvider style={{ flex: 1 }}>
+    <SafeAreaProvider style={{flex: 1}}>
       <NavigationContainer theme={MyTheme}>
         <BottomNavigator />
       </NavigationContainer>
