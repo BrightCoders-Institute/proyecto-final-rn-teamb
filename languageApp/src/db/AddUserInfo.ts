@@ -5,7 +5,7 @@ import {NavigationType} from '../../types/NavigationType';
 
 export const addUserInfo = (
   {uid, displayName, email}: FirebaseAuthTypes.User,
-  navigation: NavigationType,
+  //navigation?: NavigationType,
   name?: string,
 ) => {
   if (name !== undefined) displayName = name;

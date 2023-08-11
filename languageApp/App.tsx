@@ -9,6 +9,8 @@ import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/Listeni
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { BottomNavigator } from './src/navigation/BottomNavigator';
+import { SignUpScreen } from './src/screens/SignUp/SignUpScreen';
+import { Login } from './src/screens/Login/Login';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -47,12 +49,11 @@ const App: React.FC = () => {
     },
   };
   return (
-    // <SafeAreaProvider style={{ flex: 1 }}>
-    //   <NavigationContainer theme={MyTheme}>
-    //     <BottomNavigator />
-    //   </NavigationContainer>
-    // </SafeAreaProvider>
-    
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer theme={MyTheme}>
+        <BottomNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

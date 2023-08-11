@@ -4,18 +4,18 @@ import {addUserInfo} from '../db/AddUserInfo';
 import {NavigationType} from '../../types/NavigationType';
 
 interface SignUpInterface {
+  name: string;
   email: string;
   password: string;
-  name: string;
 }
 
 export const signup = async (
-  {email, password, name}: SignUpInterface,
-  navigation: NavigationType,
+  {name, email, password }: SignUpInterface,
+  navigation?: NavigationType,
 ) => {
   try {
     const {user} = await auth().createUserWithEmailAndPassword(email, password);
-    addUserInfo(user, navigation, name);
+    addUserInfo(user, name);
   } catch (error) {
     if (error.code === 'auth/email-already-in-use') {
       Alert.alert('The email address is already in use!');
