@@ -4,7 +4,7 @@ import styles from './styles';
 
 interface AccountActionButtonProps {
   title: String;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 export const AccountActionButton: React.FC<AccountActionButtonProps> = ({

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     justifyContent: 'center',
     alignContent: 'center',
-    margin: 36,
+    margin: 26,
   },
   title: {
     color: '#FFFFFF',
