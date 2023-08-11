@@ -36,8 +36,6 @@ const App: React.FC = () => {
   
   return (
     <View>
-     <PodcastScreen accessToken={accessToken}/> 
-     {/* <ListeningSongsScreen accessToken={accessToken}/> */}
     </View>
   );
 };
