@@ -1,5 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
+import React from 'react';
+//navigation
+import { View, Text, Button } from 'react-native';
 import axios from 'axios';
 import { PodcastScreen } from './src/screens/PodcastScreen/PodcastScreen';
 import config from 'react-native-config'; // .env 
@@ -7,6 +11,7 @@ import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/Listeni
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
@@ -23,20 +28,29 @@ const App: React.FC = () => {
             },
           }
         );
-  
+
         const token = response.data.access_token;
         setAccessToken(token);
       } catch (error) {
         console.error('Error fetching access token:', error);
       }
     };
-  
+
     fetchAccessToken();
   }, []);
-  
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'white',
+    },
+  };
   return (
-    <View>
-    </View>
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer theme={MyTheme}>
+        <BottomNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
