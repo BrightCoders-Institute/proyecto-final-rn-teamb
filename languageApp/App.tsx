@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import React from 'react';
 //navigation
 import { View, Text, Button } from 'react-native';
 import axios from 'axios';
 import { PodcastScreen } from './src/screens/PodcastScreen/PodcastScreen';
 import config from 'react-native-config'; // .env 
 import { ListeningSongsScreen } from './src/screens/ListeningSongsScreen/ListeningSongsScreen';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { BottomNavigator } from './src/navigation/BottomNavigator';
+import { SignUpScreen } from './src/screens/SignUp/SignUpScreen';
+import { Login } from './src/screens/Login/Login';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);

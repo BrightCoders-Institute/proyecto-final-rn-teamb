@@ -5,6 +5,7 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
+import { signup } from '../../auth/SignUp';
 
 
 interface FormValues {
@@ -46,9 +47,15 @@ export const SignUpScreen: React.FC = () => {
       initialValues: initialValues,
       validationSchema: Yup.object(validationSchema()),
       validateOnChange: true,
-      onSubmit : formValue => {
-        console.log("llego")
-        //Alert.alert(formValue.name);
+      onSubmit : async formValue => {
+        await signup(
+          {
+            name: formValue.name,
+            email: formValue.email,
+            password: formValue.password,
+          },
+          //navigation,
+        );
       },
     });
 
