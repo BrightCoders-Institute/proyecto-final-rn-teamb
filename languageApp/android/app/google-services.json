@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353609821031",
+    "project_id": "languegeapp",
+    "storage_bucket": "languegeapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353609821031:android:ba85013f0f17dc8f3c9dc2",
+        "android_client_info": {
+          "package_name": "com.languageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353609821031-l5v152inusm7apamgob8gp16vm4c7f8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnvfPsOoFFAJXZw3rSzj0udDNkDrIMdfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353609821031-l5v152inusm7apamgob8gp16vm4c7f8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
