@@ -96,10 +96,10 @@ export const Login: React.FC = () => {
   );
 };
 
-
 const validationSchema = () => {
   return {
     email: Yup.string().email().required('Email is required'),
     password: Yup.string().required('The password is required'),
   };
 }
+export default Login;
