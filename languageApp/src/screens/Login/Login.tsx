@@ -50,9 +50,6 @@ export const Login: React.FC = () => {
       },
     });
 
-    const handleFormikSubmit = (formik) => {
-        formik.handleSubmit('andi')
-    }
   return (
     <View style={styles.container}>
       <Text style={styles.loginTitle}>Login</Text>
@@ -101,8 +98,8 @@ export const Login: React.FC = () => {
 
 
 const validationSchema = () => {
-    return {
-      email: Yup.string().email().required('Email is required'),
-      password: Yup.string().required('The password is required'),
-    };
-  }
+  return {
+    email: Yup.string().email().required('Email is required'),
+    password: Yup.string().required('The password is required'),
+  };
+}
