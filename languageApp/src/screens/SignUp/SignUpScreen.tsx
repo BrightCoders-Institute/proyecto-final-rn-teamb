@@ -121,9 +121,9 @@ export const SignUpScreen: React.FC = () => {
 
 
 const validationSchema = () => {
-    return {
-      name: Yup.string().required('Name is required'),
-      email: Yup.string().email().required('Email is required'),
-      password: Yup.string().required('The password is required'),
-    };
-  }
+  return {
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email().required('Email is required'),
+    password: Yup.string().required('The password is required'),
+  };
+}

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 //navigation
 import { View, Text, Button } from 'react-native';
