@@ -3,7 +3,7 @@ import {View} from 'react-native';
 //components
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import { ToReadCard } from '../../components/ToReadCard/ToReadCard';
 
 export const ToReadScreen = () => {
   return (
@@ -14,10 +14,8 @@ export const ToReadScreen = () => {
           'Reading is a powerful way to enhance your vocabulary, grammar, and reading comprehension skills!'
         }
       />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
-      <ListeningCard name={'August'} author={'TaylorSwift'} />
+      <ToReadCard title={'The Wolf in Sheep\'s Clothing'} author={'Aesop\'s Fables'} moral={'The evil doer often comes to harm through his own deceit.'}/>
+      <ToReadCard title={'The Wolf in Sheep\'s Clothing'} author={'Aesop\'s Fables'} moral={'The evil doer often comes to harm through his own deceit.'}/>
     </View>
   );
 };

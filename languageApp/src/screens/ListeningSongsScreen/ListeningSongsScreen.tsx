@@ -5,7 +5,7 @@ import { DescriptionText } from '../../components/DescriptionText/DescriptionTex
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
 
 interface ListeningSongsScreenProps {
-  accessToken: string | null;
+  accessToken?: string | null;
 }
 
 interface Track {

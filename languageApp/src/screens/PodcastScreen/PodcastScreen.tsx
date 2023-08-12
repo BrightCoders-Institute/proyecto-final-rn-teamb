@@ -1,40 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
+//components
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
 
 interface PodcastScreenProps {
-  accessToken: string | null;
+  accessToken?: string | null;
 }
 
 interface PodcastEpisode {
   name: string;
   publisher: string;
-  images: { url: string }[];
+  images: {url: string}[];
 }
 
-export const PodcastScreen: React.FC<PodcastScreenProps> = ({
-  accessToken,
-}) => {
+export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
 
   const getRandomEpisodes = async (count: number) => {
-
     try {
       const token = accessToken;
       const episodes: PodcastEpisode[] = [];
-      console.log(`https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(1,100)}`)
+      console.log(
+        `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(
+          1,
+          100,
+        )}`,
+      );
       for (let i = 0; i < count; i++) {
         const response = await fetch(
-          `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(1,100)}`,
+          `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(
+            1,
+            100,
+          )}`,
           {
             method: 'GET',
             headers: {
               Authorization: `Bearer  ${token}`,
             },
-          }
-        )
+          },
+        );
         const data = await response.json();
         const randomEpisode = data.shows.items[0];
         episodes.push(randomEpisode);
@@ -50,11 +56,11 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({
     const randomIndex: number = Math.floor(Math.random() * alphabet.length);
     return alphabet[randomIndex];
   };
-  
+
   const getRandomNumber = (min: number, max: number): string => {
     return (Math.floor(Math.random() * (max - min + 1)) + min).toString();
   };
-  
+
   useEffect(() => {
     getRandomEpisodes(4); // number of episodes to show
   }, [accessToken]);

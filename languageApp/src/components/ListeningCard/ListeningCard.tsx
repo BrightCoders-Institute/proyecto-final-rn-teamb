@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 interface ListeningCardProps {
   name: String;
   author: String;
-  imageUri: string; 
+  imageUri?: string;
 }
 
 export const ListeningCard: React.FC<ListeningCardProps> = ({ name, author, imageUri }) => {
