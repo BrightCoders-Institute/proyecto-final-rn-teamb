@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface StoryProps {
   title?: String;
-  author: String;
+  author?: String;
 }
 
 export const StoryScreen: React.FC<StoryProps> = ({title, author}) => {
