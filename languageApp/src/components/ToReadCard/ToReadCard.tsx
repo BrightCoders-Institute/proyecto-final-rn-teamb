@@ -7,15 +7,17 @@ interface ToReadCardProps {
   title: String;
   author: String;
   moral: String;
+  onPress: () => void;
 }
 
 export const ToReadCard: React.FC<ToReadCardProps> = ({
   title,
   author,
   moral,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <View style={styles.textContainer}>
