@@ -10,19 +10,43 @@ import {VerbsScreen} from '../screens/VerbsScreen/VerbsScreen';
 import {ResourcesScreen} from '../screens/ResourcesScreen/ResourcesScreen';
 import {PodcastScreen} from '../screens/PodcastScreen/PodcastScreen';
 import {ToReadScreen} from '../screens/ToReadScreen/ToReadScreen';
+import {StoryScreen} from '../screens/StoryScreen/StoryScreen';
 
 const Stack = createStackNavigator();
 
 export const ResourcesScreenNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="ResourcesScreen" component={ResourcesScreen} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ResourcesScreen"
+        component={ResourcesScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="ListeningSongsScreen"
         component={ListeningSongsScreen}
+        options={{headerShown: false}}
       />
-      <Stack.Screen name="PodcastScreen" component={PodcastScreen} />
-      <Stack.Screen name="ToReadScreen" component={ToReadScreen} />
+      <Stack.Screen
+        name="PodcastScreen"
+        component={PodcastScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ToReadScreen"
+        component={ToReadScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="StoryScreen"
+        component={StoryScreen}
+        options={{
+          headerTitle: '',
+          headerTintColor: '#5FCDD9',
+          headerShadowVisible: false,
+          headerTransparent: true,
+        }}
+      />
     </Stack.Navigator>
   );
 };
