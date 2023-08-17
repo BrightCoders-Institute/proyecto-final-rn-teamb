@@ -4,10 +4,10 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ToReadCardProps {
-  title: String;
-  author: String;
-  moral: String;
-  onPress: () => void;
+  title?: String;
+  author?: String;
+  moral?: String;
+  onPress?: () => void;
 }
 
 export const ToReadCard: React.FC<ToReadCardProps> = ({
