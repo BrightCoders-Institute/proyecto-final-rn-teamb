@@ -7,6 +7,7 @@ import {BottomNavigator} from './src/navigation/BottomNavigator';
 import axios from 'axios';
 // .env
 import config from 'react-native-config';
+import { AuthNavigator, ResourcesScreenNavigator } from './src/navigation/Navigator';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -47,7 +48,8 @@ const App: React.FC = () => {
   return (
     <SafeAreaProvider style={{flex: 1}}>
       <NavigationContainer theme={MyTheme}>
-        <BottomNavigator />
+        <AuthNavigator />
+        {/* <BottomNavigator /> */}
       </NavigationContainer>
     </SafeAreaProvider>
   );

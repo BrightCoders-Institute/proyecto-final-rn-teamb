@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import { signup } from '../../auth/SignUp';
+import { NavigationType } from '../../../types/NavigationType';
 
 
 interface FormValues {
@@ -14,7 +15,7 @@ interface FormValues {
     password: string;
 }
 
-export const SignUpScreen: React.FC = () => {
+export const SignUpScreen: React.FC = ({navigation}: NavigationType) => {
     const [keyboardStatus, setKeyboardStatus] = useState(false);
 
   useEffect(() => {
@@ -113,7 +114,9 @@ export const SignUpScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.registerContainer}>
-        <Text style={styles.registerText}>Already have an account? Log In <Text style={styles.registerClick}>Log In</Text> </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.registerText}>Already have an account? <Text style={styles.registerClick}>Log In</Text> </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

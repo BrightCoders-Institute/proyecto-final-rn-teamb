@@ -11,6 +11,9 @@ import {ResourcesScreen} from '../screens/ResourcesScreen/ResourcesScreen';
 import {PodcastScreen} from '../screens/PodcastScreen/PodcastScreen';
 import {ToReadScreen} from '../screens/ToReadScreen/ToReadScreen';
 import {StoryScreen} from '../screens/StoryScreen/StoryScreen';
+import { PrincipalScreen } from '../screens/PrincipalScreen/PrincipalScreen';
+import { Login } from '../screens/Login/Login';
+import { SignUpScreen } from '../screens/SignUp/SignUpScreen';
 
 const Stack = createStackNavigator();
 
@@ -92,3 +95,26 @@ export const SettingsScreenNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+
+export const AuthNavigator = () => {
+  return(
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="PrincipalScreen"
+        component={PrincipalScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpScreen"
+        component={SignUpScreen}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  )
+}
