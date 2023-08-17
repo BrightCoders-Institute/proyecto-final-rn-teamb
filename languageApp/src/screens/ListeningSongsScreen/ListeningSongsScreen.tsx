@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
+//components
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import {Track} from '../../interfaces/CardsInterfaces';
 
 interface ListeningSongsScreenProps {
   accessToken?: string | null;
-}
-
-interface Track {
-  name: string;
-  artists: { name: string }[];
-  album: { images: { url: string }[] };
 }
 
 export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
@@ -32,7 +28,7 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
         const data = await response.json();
         const randomTrack = data.tracks.items[0];

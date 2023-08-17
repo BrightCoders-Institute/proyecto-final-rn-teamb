@@ -4,15 +4,10 @@ import {View} from 'react-native';
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
 import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
 
 interface PodcastScreenProps {
   accessToken?: string | null;
-}
-
-interface PodcastEpisode {
-  name: string;
-  publisher: string;
-  images: {url: string}[];
 }
 
 export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
