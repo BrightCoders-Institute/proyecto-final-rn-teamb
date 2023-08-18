@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 20,
     padding: 10,
-    shadowColor: '#000',
+    shadowColor: '#EFF0EF',
     shadowOffset: {
       width: 0,
       height: 4,
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 4,
   },
   topContainer: {
     flexDirection: 'row',
