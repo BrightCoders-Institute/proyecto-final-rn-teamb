@@ -47,7 +47,7 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
     }
   };
   const getRandomLetter = (): string => {
-    const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     const randomIndex: number = Math.floor(Math.random() * alphabet.length);
     return alphabet[randomIndex];
   };

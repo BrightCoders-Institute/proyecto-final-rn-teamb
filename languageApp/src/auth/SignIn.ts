@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import {NavigationType} from '../../types/NavigationType';
+import firestore from '@react-native-firebase/firestore';
 
 interface SignIpInterface {
   email: string;
@@ -13,7 +14,11 @@ export const signIn = async (
 ) => {
   try {
     const {user} = await auth().signInWithEmailAndPassword(email, password);
-    Alert.alert('Login')
+    const result = await firestore().collection('Users').doc(user.uid).get();
+    if (result.exists) {
+      Alert.alert('Login');
+    }
+    return result.data();
   } catch (error) {
     console.log(error);
     if (error.code === 'auth/user-not-found') {

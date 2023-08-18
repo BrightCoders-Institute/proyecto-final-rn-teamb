@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import styles from './styles';
 
 interface DescriptionTextProps {
-  description: String;
+  description: string;
 }
 
 export const DescriptionText: React.FC<DescriptionTextProps> = ({

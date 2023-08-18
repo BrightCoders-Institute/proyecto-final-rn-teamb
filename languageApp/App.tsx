@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 //navigation
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {BottomNavigator} from './src/navigation/BottomNavigator';
 //axios
 import axios from 'axios';
 // .env
 import config from 'react-native-config';
 import { AuthNavigator, ResourcesScreenNavigator } from './src/navigation/Navigator';
+import {Provider, useDispatch, useSelector} from 'react-redux';
+import {RootState} from './src/store/reducers';
+import Router from './src/router/Router';
+import { store } from './src/store/store';
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -38,19 +41,12 @@ const App: React.FC = () => {
 
     fetchAccessToken();
   }, []);
-  const MyTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: 'white',
-    },
-  };
+  
   return (
     <SafeAreaProvider style={{flex: 1}}>
-      <NavigationContainer theme={MyTheme}>
-        <AuthNavigator />
-        {/* <BottomNavigator /> */}
-      </NavigationContainer>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     </SafeAreaProvider>
   );
 };

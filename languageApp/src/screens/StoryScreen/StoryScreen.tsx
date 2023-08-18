@@ -7,8 +7,8 @@ import ReadingImage from '../../components/Icon/ReadingImage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface StoryProps {
-  title?: String;
-  author?: String;
+  title?: string;
+  author?: string;
 }
 
 export const StoryScreen: React.FC<StoryProps> = ({title, author}) => {

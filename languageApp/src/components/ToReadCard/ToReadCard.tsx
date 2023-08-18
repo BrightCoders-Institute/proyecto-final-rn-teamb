@@ -4,9 +4,9 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ToReadCardProps {
-  title?: String;
-  author?: String;
-  moral?: String;
+  title?: string;
+  author?: string;
+  moral?: string;
   onPress?: () => void;
 }
 

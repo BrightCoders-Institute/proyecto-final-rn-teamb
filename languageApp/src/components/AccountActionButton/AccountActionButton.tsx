@@ -3,7 +3,7 @@ import {TouchableOpacity, View, Text} from 'react-native';
 import styles from './styles';
 
 interface AccountActionButtonProps {
-  title: String;
+  title: string;
   onPress?: () => void;
 }
 
