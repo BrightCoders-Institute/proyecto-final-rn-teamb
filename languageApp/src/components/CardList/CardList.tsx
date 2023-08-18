@@ -3,12 +3,13 @@ import {FlatList} from 'react-native';
 //components
 import {ToReadCard} from '../ToReadCard/ToReadCard';
 import {ListeningCard} from '../ListeningCard/ListeningCard';
-//navigation
-import {useRoute} from '@react-navigation/native';
 //interfaces
 import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
 import {Track} from '../../interfaces/CardsInterfaces';
 import {Story} from '../../interfaces/CardsInterfaces';
+//navigation
+import {useRoute} from '@react-navigation/native';
+import {NavigationProps} from '../../interfaces/NavigationInterface';
 
 interface CardListProps {
   musicData?: Track[];
@@ -16,10 +17,18 @@ interface CardListProps {
   storyData?: Story[];
 }
 
-const ToReadList: React.FC<{data: Story[]}> = ({data}) => (
+const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
+  data,
+  navigation,
+}) => (
   <FlatList
     data={data}
-    renderItem={({item}) => <ToReadCard {...item} />}
+    renderItem={({item}) => (
+      <ToReadCard
+        {...item}
+        onPress={() => navigation.navigate('StoryScreen')}
+      />
+    )}
     keyExtractor={(item, index) => index.toString()}
   />
 );
@@ -40,15 +49,16 @@ const MusicList: React.FC<{data: Track[]}> = ({data}) => (
   />
 );
 
-const CardList: React.FC<CardListProps> = ({
+const CardList: React.FC<CardListProps & NavigationProps> = ({
   musicData,
   podcastData,
   storyData,
+  navigation,
 }) => {
   const route = useRoute();
 
   if (route.name === 'ToReadScreen') {
-    return <ToReadList data={storyData || []} />;
+    return <ToReadList data={storyData || []} navigation={navigation} />;
   } else if (route.name === 'PodcastScreen') {
     return <PodcastList data={podcastData || []} />;
   } else {
