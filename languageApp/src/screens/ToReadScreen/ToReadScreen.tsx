@@ -1,17 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
+import axios from 'axios';
 //components
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ToReadCard} from '../../components/ToReadCard/ToReadCard';
+import {Story} from '../../interfaces/CardsInterfaces';
+import CardList from '../../components/CardList/CardList';
 //navigation
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProps} from '../../interfaces/NavigationInterface';
 
-interface ToReadProps {
-  navigation: NavigationProp<any>;
-}
+export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
+  const [stories, setStories] = useState<Story[]>([]);
 
-export const ToReadScreen: React.FC<ToReadProps> = ({navigation}) => {
+  useEffect(() => {
+    axios
+      .get('https://shortstories-api.onrender.com/stories')
+      .then(response => {
+        const apiStories: Story[] = response.data;
+        setStories(apiStories);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   return (
     <View>
       <HeaderText header={'Reading practice'} />
@@ -20,12 +32,7 @@ export const ToReadScreen: React.FC<ToReadProps> = ({navigation}) => {
           'Reading is a powerful way to enhance your vocabulary, grammar, and reading comprehension skills!'
         }
       />
-      <ToReadCard
-        title={"The Wolf in Sheep's Clothing"}
-        author={"Aesop's Fables"}
-        moral={'The evil doer often comes to harm through his own deceit.'}
-        onPress={() => navigation.navigate('StoryScreen')}
-      />
+      <CardList storyData={stories} navigation={navigation} />
     </View>
   );
 };
