@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-//components
-import {HeaderText} from '../../components/HeaderText/HeaderText';
-import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
-import {Track} from '../../interfaces/CardsInterfaces';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+// components
+import { HeaderText } from '../../components/HeaderText/HeaderText';
+import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
+import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
+import { Track } from '../../interfaces/CardsInterfaces';
 
 interface ListeningSongsScreenProps {
   accessToken?: string | null;
@@ -19,10 +19,12 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
     try {
       const token = accessToken;
       const songs: Track[] = [];
+      
+      const randomLetters = generateRandomLetters(count); // Generate an array of random letters
 
       for (let i = 0; i < count; i++) {
         const response = await fetch(
-          `https://api.spotify.com/v1/search?q=year:${getRandomYear()}&type=track&limit=1`,
+          `https://api.spotify.com/v1/search?q=${randomLetters[i]}&type=track&limit=1`,
           {
             method: 'GET',
             headers: {
@@ -41,12 +43,20 @@ export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
     }
   };
 
-  const getRandomYear = () => {
-    return Math.floor(Math.random() * (2023 - 2000 + 1)) + 2000;
+  const generateRandomLetters = (count: number) => {
+    const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
+    const randomLetters: string[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const randomIndex: number = Math.floor(Math.random() * alphabet.length);
+      randomLetters.push(alphabet[randomIndex]);
+    }
+
+    return randomLetters;
   };
 
   useEffect(() => {
-    getRandomSongs(3); // number of songs to show
+    getRandomSongs(4); // number of songs to show
   }, [accessToken]);
 
   return (
