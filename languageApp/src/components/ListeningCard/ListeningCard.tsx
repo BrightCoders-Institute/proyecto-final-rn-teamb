@@ -4,8 +4,8 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ListeningCardProps {
-  name?: String;
-  author?: String;
+  name?: string;
+  author?: string;
   imageUri?: string;
 }
 

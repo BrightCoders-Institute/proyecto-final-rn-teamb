@@ -4,8 +4,8 @@ import FlipCard from 'react-native-flip-card';
 import styles from './styles';
 
 interface FlashCardProps {
-  faceText: String;
-  backText: String;
+  faceText: string;
+  backText: string;
 }
 
 export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {

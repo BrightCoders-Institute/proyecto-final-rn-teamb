@@ -9,20 +9,23 @@ interface SignUpInterface {
   password: string;
 }
 
-export const signup = async (
-  {name, email, password }: SignUpInterface,
-  navigation?: NavigationType,
-) => {
-  try {
-    const {user} = await auth().createUserWithEmailAndPassword(email, password);
-    addUserInfo(user, name);
-  } catch (error) {
-    if (error.code === 'auth/email-already-in-use') {
-      Alert.alert('The email address is already in use!');
-    }
+export const signup = async ({name, email, password}: SignUpInterface) =>
+  //navigation?: NavigationType,
+  {
+    try {
+      const {user} = await auth().createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      const userRegistered = addUserInfo(user, name);
+      return userRegistered;
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        Alert.alert('The email address is already in use!');
+      }
 
-    if (error.code === 'auth/invalid-email') {
-      Alert.alert('The email address is invalid!');
+      if (error.code === 'auth/invalid-email') {
+        Alert.alert('The email address is invalid!');
+      }
     }
-  }
-};
+  };

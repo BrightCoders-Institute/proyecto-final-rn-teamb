@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import styles from './styles';
 
 interface HeaderTextProps {
-  header?: String;
+  header?: string;
 }
 
 export const HeaderText: React.FC<HeaderTextProps> = ({header}) => {
