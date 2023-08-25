@@ -36,6 +36,7 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
             },
           },
         );
+        console.log("what the fuck the token is :" + token)
         const data = await response.json();
         const randomEpisode = data.shows.items[0];
         episodes.push(randomEpisode);
