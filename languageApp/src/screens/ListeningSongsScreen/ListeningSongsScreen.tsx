@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, ScrollView } from 'react-native';
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
@@ -51,7 +51,7 @@ export const ListeningSongsScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    getRandomSongs(4); // number of songs to show
+    getRandomSongs(44); // number of songs to show
   }, [accessToken]);
 
   if (isLoading) {
@@ -70,14 +70,16 @@ export const ListeningSongsScreen: React.FC = () => {
           'Listening to music is a fantastic way to learn new words and their pronunciation!'
         }
       />
-      {randomSongs.map((song, index) => (
-        <ListeningCard
-          key={index}
-          name={song.name}
-          author={song.artists[0].name}
-          imageUri={song.album.images[0].url}
-        />
-      ))}
+      <ScrollView>
+        {randomSongs.map((song, index) => (
+          <ListeningCard
+            key={index}
+            name={song.name}
+            author={song.artists[0].name}
+            imageUri={song.album.images[0].url}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };
