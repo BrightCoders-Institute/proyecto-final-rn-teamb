@@ -35,7 +35,7 @@ export const ToReadCard: React.FC<ToReadCardProps> = ({
           <TouchableOpacity onPress={handleMarkRead}>
             <Icon
               name={markRead ? 'eye' : 'eye-outline'}
-              size={40}
+              size={25}
               color="#04BFAD"
             />
           </TouchableOpacity>
