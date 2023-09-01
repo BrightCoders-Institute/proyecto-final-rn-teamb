@@ -11,7 +11,9 @@ export interface Track {
 }
 
 export interface Story {
+  id: string;
   title: string;
+  story: string;
   author: string;
   moral: string;
 }
