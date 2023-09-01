@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 //components
@@ -9,15 +9,29 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 interface StoryProps {
   title?: string;
   author?: string;
+  read?: boolean;
 }
 
-export const StoryScreen: React.FC<StoryProps> = ({title, author}) => {
+export const StoryScreen: React.FC<StoryProps> = ({title, author, read}) => {
+  const [markRead, setMarkRead] = useState(read);
+
+  const handleMarkRead = () => {
+    read = !markRead;
+    setMarkRead(!markRead);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.upPartContainer}>
         <ReadingImage />
-        <TouchableOpacity style={styles.favoritesButton}>
-          <Icon name="heart-circle" size={40} color="#04BFAD" />
+        <TouchableOpacity
+          style={styles.favoritesButton}
+          onPress={handleMarkRead}>
+          <Icon
+            name={markRead ? 'eye' : 'eye-outline'}
+            size={40}
+            color="#04BFAD"
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.storyContainer}>
