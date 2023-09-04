@@ -26,7 +26,13 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
     renderItem={({item}) => (
       <ToReadCard
         {...item}
-        onPress={() => navigation.navigate('StoryScreen')}
+        onPress={() =>
+          navigation.navigate('StoryScreen', {
+            title: item.title,
+            author: item.author,
+            story: item.story,
+          })
+        }
       />
     )}
     keyExtractor={(item, index) => index.toString()}
