@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import firestore from '@react-native-firebase/firestore';
 import styles from './styles';
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {AccountActionButton} from '../../components/AccountActionButton/AccountActionButton';
