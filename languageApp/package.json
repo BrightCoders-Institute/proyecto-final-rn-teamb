@@ -11,7 +11,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^1.4.0",
     "@react-native-firebase/app": "^18.3.0",
     "@react-native-firebase/auth": "^18.3.0",
     "@react-native-firebase/firestore": "^18.3.0",
@@ -22,6 +21,9 @@
     "@react-navigation/native-stack": "^6.9.13",
     "@react-navigation/stack": "^6.3.17",
     "@reduxjs/toolkit": "^1.9.5",
+    "@rneui/base": "^4.0.0-rc.8",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "axios": "^1.4.0",
     "formik": "^2.4.2",
     "react": "18.2.0",
     "react-native": "0.72.3",
