@@ -16,7 +16,7 @@ export const HomeScreen: React.FC<HomeProps> = ({navigation}) => {
     <View>
       <Text style={styles.greetings}>Hi there!</Text>
       <HeaderText header="What do you want to learn today?" />
-      <SectionButton title="Search Words" onPress={() => {}} />
+      <SectionButton title="Search Words" onPress={() => navigation.navigate('SearchWords')} />
       <SectionButton
         title="Verbs"
         onPress={() => navigation.navigate('VerbsScreen')}
