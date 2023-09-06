@@ -15,6 +15,7 @@ import {PrincipalScreen} from '../screens/PrincipalScreen/PrincipalScreen';
 import {Login} from '../screens/Login/Login';
 import {SignUpScreen} from '../screens/SignUp/SignUpScreen';
 import EditProfile from '../screens/EditProfileScreen/EditProfileScreen';
+import { SearchWords } from '../screens/SearchWords/SearchWords';
 
 const Stack = createStackNavigator();
 
@@ -83,6 +84,16 @@ export const HomeScreenNavigator = () => {
           headerTitle: '',
           headerTintColor: '#5FCDD9',
           headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="SearchWords"
+        component={SearchWords}
+        options={{
+          headerTitle: '',
+          headerTintColor: '#5FCDD9',
+          headerShadowVisible: false,
+          headerTransparent: true,
         }}
       />
     </Stack.Navigator>
