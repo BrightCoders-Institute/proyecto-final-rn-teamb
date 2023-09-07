@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Button } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import styles from './styles'
+
 export const UpdatePasswordScreen: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -39,7 +40,10 @@ export const UpdatePasswordScreen: React.FC = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Change Password</Text>
+      <Text style={styles.subtitle}>Enter your current and new password below:</Text>
+
       <Text style={styles.label}>Current Password</Text>
       <TextInput
         style={styles.input}
@@ -76,3 +80,4 @@ export const UpdatePasswordScreen: React.FC = () => {
   );
 };
 
+export default UpdatePasswordScreen;
