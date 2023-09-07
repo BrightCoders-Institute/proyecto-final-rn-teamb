@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
@@ -27,9 +27,6 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
   const { email, name }: UserProfile = useSelector(
     (state: RootState) => state.data
   );
-
-
-  // Add this console log to display the uid
 
   const initialValues: UserProfile = {
     email: email,
@@ -59,9 +56,8 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
   });
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
-      <HeaderText header="Edit Profile" />
       <View style={styles.pfpContainer}>
         <View>
           <Icon name="person-circle" size={100} style={{ color: 'black' }} />
@@ -98,14 +94,13 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={formik.handleSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('UpdatePasswordScreen')}>
-        <Text>Change Password</Text>
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('UpdatePasswordScreen')}>
+        <Text style={styles.buttonText}>Change Password</Text>
       </TouchableOpacity>
-
 
       <AccountActionButton title="Logout" />
       <AccountActionButton title="Delete Account" />
-    </View>
+    </ScrollView>
   );
 };
 
