@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+
+import { View, ActivityIndicator, ScrollView } from 'react-native';
+
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
@@ -8,7 +10,6 @@ import { useAccessToken } from '../../navigation/AccessTokenContent';
 
 export const PodcastScreen: React.FC = () => {
   const accessToken = useAccessToken();
-  console.log("accessToken is = "+ accessToken)
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -53,7 +54,7 @@ export const PodcastScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    getRandomEpisodes(4);
+    getRandomEpisodes(8);
   }, [accessToken]);
 
   if (isLoading) {
@@ -72,14 +73,16 @@ export const PodcastScreen: React.FC = () => {
           'Podcasts help you learn about your favorite topics and hear different accents!'
         }
       />
-      {randomEpisodes.map((episode, index) => (
-        <ListeningCard
-          key={index}
-          name={episode.name}
-          author={episode.publisher}
-          imageUri={episode.images[0].url}
-        />
-      ))}
+      <ScrollView>
+        {randomEpisodes.map((episode, index) => (
+          <ListeningCard
+            key={index}
+            name={episode.name}
+            author={episode.publisher}
+            imageUri={episode.images[0].url}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };
