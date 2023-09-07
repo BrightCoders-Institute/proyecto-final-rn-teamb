@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
 import { setEmail, setName } from '../../store/userSlice';
 import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo function for updating user info
-
+import { deleteAccount } from '../../db/DeleteAccount'
 // Update the UserProfile interface to include uid
 interface EditProfileProps {
   navigation: NavigationProp<any>;
@@ -99,7 +99,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
       </TouchableOpacity>
 
       <AccountActionButton title="Logout" />
-      <AccountActionButton title="Delete Account" />
+      <AccountActionButton onPress={deleteAccount} title="Delete Account" />
     </ScrollView>
   );
 };
