@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 //components
@@ -9,12 +9,31 @@ import SearchImage from '../../components/Icon/SearchImage';
 import {WordCard} from '../../components/WordCard/WordCard';
 
 export const SearchWords = () => {
+  const [wordData, setWordData] = useState<{
+    word: string;
+    definition: string | string[];
+  } | null>(null);
+
+  const handleWordData = (word: string, definition: string | string[]) => {
+    setWordData({word, definition});
+  };
   return (
     <View style={styles.container}>
-      <SearchWordsBar />
+      <SearchWordsBar wordData={handleWordData} />
       <View style={styles.bodyContainer}>
-        <HeaderText header="What word you’r looking for?" />
-        <SearchImage />
+        {wordData ? (
+          <>
+            <HeaderText
+              header={`Definitions and pronunciation of the word "${wordData.word}"`}
+            />
+            <WordCard word={wordData.word} definition={wordData.definition} />
+          </>
+        ) : (
+          <>
+            <HeaderText header="What word you’r looking for?" />
+            <SearchImage />
+          </>
+        )}
       </View>
     </View>
   );
