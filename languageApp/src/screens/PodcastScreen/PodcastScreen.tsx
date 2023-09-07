@@ -1,51 +1,47 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-//components
-import {HeaderText} from '../../components/HeaderText/HeaderText';
-import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
-import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
+import React, { useEffect, useState } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import { HeaderText } from '../../components/HeaderText/HeaderText';
+import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
+import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
+import { PodcastEpisode } from '../../interfaces/CardsInterfaces';
+import { useAccessToken } from '../../navigation/AccessTokenContent';
 
-interface PodcastScreenProps {
-  accessToken?: string | null;
-}
-
-export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
+export const PodcastScreen: React.FC = () => {
+  const accessToken = useAccessToken();
+  console.log("accessToken is = "+ accessToken)
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getRandomEpisodes = async (count: number) => {
     try {
-      const token = accessToken;
       const episodes: PodcastEpisode[] = [];
-      console.log(
-        `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(
-          1,
-          100,
-        )}`,
-      );
+
       for (let i = 0; i < count; i++) {
+        const randomLetter = getRandomLetter();
+        const randomOffset = getRandomNumber(1, 2);
+
         const response = await fetch(
-          `https://api.spotify.com/v1/search?q=${getRandomLetter()}&type=show&market=US&limit=1&offset=${getRandomNumber(
-            1,
-            100,
-          )}`,
+          `https://api.spotify.com/v1/search?q=${randomLetter}&type=show&market=US&limit=1&offset=${randomOffset}`,
           {
             method: 'GET',
             headers: {
-              Authorization: `Bearer  ${token}`,
+              Authorization: `Bearer ${accessToken}`,
             },
           },
         );
+
         const data = await response.json();
         const randomEpisode = data.shows.items[0];
         episodes.push(randomEpisode);
       }
 
       setRandomEpisodes(episodes);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching random episodes:', error);
     }
   };
+
   const getRandomLetter = (): string => {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     const randomIndex: number = Math.floor(Math.random() * alphabet.length);
@@ -57,8 +53,16 @@ export const PodcastScreen: React.FC<PodcastScreenProps> = ({accessToken}) => {
   };
 
   useEffect(() => {
-    getRandomEpisodes(4); // number of episodes to show
+    getRandomEpisodes(4);
   }, [accessToken]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View>

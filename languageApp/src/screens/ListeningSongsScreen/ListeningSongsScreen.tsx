@@ -1,63 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-// components
+import { View, ActivityIndicator } from 'react-native';
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
 import { Track } from '../../interfaces/CardsInterfaces';
-
-interface ListeningSongsScreenProps {
-  accessToken?: string | null;
-}
-
-export const ListeningSongsScreen: React.FC<ListeningSongsScreenProps> = ({
-  accessToken,
-}) => {
+import { useAccessToken } from '../../navigation/AccessTokenContent';
+export const ListeningSongsScreen: React.FC = () => {
+  const accessToken = useAccessToken();
   const [randomSongs, setRandomSongs] = useState<Track[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getRandomSongs = async (count: number) => {
     try {
-      const token = accessToken;
-      const songs: Track[] = [];
-      
-      const randomLetters = generateRandomLetters(count); // Generate an array of random letters
+      if (accessToken) {
+        const songsPromises = Array.from({ length: count }, async () => {
+          const response = await fetchRandomTrack(accessToken);
+          const data = await response.json();
+          return data.tracks.items[0];
+        });
 
-      for (let i = 0; i < count; i++) {
-        const response = await fetch(
-          `https://api.spotify.com/v1/search?q=${randomLetters[i]}&type=track&limit=1`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        const data = await response.json();
-        const randomTrack = data.tracks.items[0];
-        songs.push(randomTrack);
+        const songs = await Promise.all(songsPromises);
+        setRandomSongs(songs);
       }
 
-      setRandomSongs(songs);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching random songs:', error);
     }
   };
 
-  const generateRandomLetters = (count: number) => {
+  const fetchRandomTrack = async (token: string) => {
+    const randomLetter = generateRandomLetter();
+    const response = await fetch(
+      `https://api.spotify.com/v1/search?q=${randomLetter}&type=track&limit=1`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
+
+
+  const generateRandomLetter = () => {
     const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
-    const randomLetters: string[] = [];
-
-    for (let i = 0; i < count; i++) {
-      const randomIndex: number = Math.floor(Math.random() * alphabet.length);
-      randomLetters.push(alphabet[randomIndex]);
-    }
-
-    return randomLetters;
+    const randomIndex: number = Math.floor(Math.random() * alphabet.length);
+    return alphabet[randomIndex];
   };
 
   useEffect(() => {
     getRandomSongs(4); // number of songs to show
   }, [accessToken]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View>
