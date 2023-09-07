@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +8,7 @@ interface ToReadCardProps {
   author?: string;
   moral?: string;
   onPress?: () => void;
+  read?: boolean;
 }
 
 export const ToReadCard: React.FC<ToReadCardProps> = ({
@@ -15,7 +16,14 @@ export const ToReadCard: React.FC<ToReadCardProps> = ({
   author,
   moral,
   onPress,
+  read,
 }) => {
+  const [markRead, setMarkRead] = useState(read);
+
+  const handleMarkRead = () => {
+    read = !markRead;
+    setMarkRead(!markRead);
+  };
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
@@ -24,12 +32,13 @@ export const ToReadCard: React.FC<ToReadCardProps> = ({
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.author}>{author}</Text>
           </View>
-          <Icon
-            style={styles.icon}
-            name="heart-circle"
-            size={30}
-            color="#04BFAD"
-          />
+          <TouchableOpacity onPress={handleMarkRead}>
+            <Icon
+              name={markRead ? 'eye' : 'eye-outline'}
+              size={25}
+              color="#04BFAD"
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.moralContainer}>
