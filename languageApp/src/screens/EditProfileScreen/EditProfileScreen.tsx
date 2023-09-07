@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -16,30 +16,21 @@ import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo fun
 interface UserProfile {
   email: string;
   name: string;
-  password: string;
-  uid: string; // Add uid to the UserProfile interface
 }
 
 const EditProfile: React.FC = () => {
   const dispatch = useDispatch();
-  const { email, name, password, uid }: UserProfile = useSelector(
+  const { email, name }: UserProfile = useSelector(
     (state: RootState) => state.data
   );
   
-  console.log('Redux State:', useSelector((state: RootState) => state));
   
-
   // Add this console log to display the uid
-  console.log('User UID:', uid);
 
   const initialValues: UserProfile = {
     email: email,
     name: name,
-    password: '', // Initialize the password field
-    uid: uid, // Pass uid
   };
-
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -50,7 +41,7 @@ const EditProfile: React.FC = () => {
       dispatch(setName(formValue.name));
       dispatch(setEmail(formValue.email));
 
-      console.log("FORM VALUE",formValue)
+      console.log("FORM VALUE", formValue)
 
       // Use the updateInfo function for updating user profiles
       try {
@@ -62,10 +53,6 @@ const EditProfile: React.FC = () => {
       }
     },
   });
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
 
   return (
     <View style={styles.container}>
@@ -79,17 +66,6 @@ const EditProfile: React.FC = () => {
           <Text style={styles.pfpLabelText}>{formik.values.email}</Text>
           <Text style={styles.pfpLabel}>Name</Text>
           <Text style={styles.pfpLabelText}>{formik.values.name}</Text>
-          <Text style={styles.pfpLabel}>UID</Text>
-          <Text style={styles.pfpLabelText}>{formik.values.uid}</Text>
-          {/* Add a field for editing the password */}
-          <Text style={styles.pfpLabel}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry={!showPassword}
-            value={formik.values.password}
-            onChangeText={(text) => formik.setFieldValue('password', text)}
-          />
         </View>
       </View>
 
@@ -113,28 +89,8 @@ const EditProfile: React.FC = () => {
       {formik.errors.name && (
         <Text style={styles.errorText}>{formik.errors.name}</Text>
       )}
-      <Text style={styles.label}>Password</Text>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={[styles.input, styles.passwordInput]}
-          placeholder="Password"
-          secureTextEntry={!showPassword}
-          value={formik.values.password}
-          onChangeText={(text) => formik.setFieldValue('password', text)}
-        />
-        <TouchableOpacity
-          style={styles.passwordToggle}
-          onPress={toggleShowPassword}>
-          <Icon
-            name={showPassword ? 'eye-off' : 'eye'}
-            size={20}
-            color="#777"
-          />
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={formik.handleSubmit}>
+
+      <TouchableOpacity style={styles.loginButton} onPress={formik.handleSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
       <AccountActionButton title="Logout" />
