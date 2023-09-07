@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { AccountActionButton } from '../../components/AccountActionButton/AccountActionButton';
@@ -13,18 +13,22 @@ import { setEmail, setName } from '../../store/userSlice';
 import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo function for updating user info
 
 // Update the UserProfile interface to include uid
+interface EditProfileProps {
+  navigation: NavigationProp<any>;
+}
+
 interface UserProfile {
   email: string;
   name: string;
 }
 
-const EditProfile: React.FC = () => {
+const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const { email, name }: UserProfile = useSelector(
     (state: RootState) => state.data
   );
-  
-  
+
+
   // Add this console log to display the uid
 
   const initialValues: UserProfile = {
@@ -56,6 +60,7 @@ const EditProfile: React.FC = () => {
 
   return (
     <View style={styles.container}>
+
       <HeaderText header="Edit Profile" />
       <View style={styles.pfpContainer}>
         <View>
@@ -93,6 +98,11 @@ const EditProfile: React.FC = () => {
       <TouchableOpacity style={styles.loginButton} onPress={formik.handleSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('UpdatePasswordScreen')}>
+        <Text>Change Password</Text>
+      </TouchableOpacity>
+
+
       <AccountActionButton title="Logout" />
       <AccountActionButton title="Delete Account" />
     </View>

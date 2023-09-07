@@ -12,6 +12,9 @@ export const editUserInfo = async (
 ) => {
   if (name !== undefined) displayName = name;
   try {
+    const currentUser = auth().currentUser;
+    console.log('Current User:', currentUser); // Add this line to log the current user
+
     // Create an object to update in Firestore
     const updateData: { [key: string]: string } = {
       firstName: displayName,
@@ -24,8 +27,7 @@ export const editUserInfo = async (
     await firestore().collection('Users').doc(uid).update(updateData);
 
     if (newPassword) {
-      // Use Firebase Authentication method to change the user's password
-      await auth().currentUser?.updatePassword(newPassword);
+      await currentUser?.updatePassword(newPassword);
     }
 
     const updatedUser = await firestore().collection('Users').doc(uid).get();
