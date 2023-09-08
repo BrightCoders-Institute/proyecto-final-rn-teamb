@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, {SvgProps, Path} from 'react-native-svg';
-const SvgComponent = (props: SvgProps) => (
+const Logo = (props: SvgProps) => (
   <Svg width={343} height={365} fill="none" {...props}>
     <Path
       fill="#5FCDD9"
@@ -154,4 +154,4 @@ const SvgComponent = (props: SvgProps) => (
     />
   </Svg>
 );
-export default SvgComponent;
+export default Logo;
