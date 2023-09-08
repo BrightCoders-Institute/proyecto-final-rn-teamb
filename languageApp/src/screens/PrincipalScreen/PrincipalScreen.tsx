@@ -1,16 +1,15 @@
-import {View, Text, Button, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {NavigationType} from '../../../types/NavigationType';
+import Logo from '../../components/Icon/Logo';
 
 export const PrincipalScreen = ({navigation}: NavigationType) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Toolanguage</Text>
-      <Text style={styles.description}>
-        Listen, read and inprove your English skills
-      </Text>
+      <Logo />
+
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={styles.signUpButton}
