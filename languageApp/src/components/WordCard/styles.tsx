@@ -19,14 +19,22 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
   },
+  definitionContainer: {
+    width: screenWidth * 0.7,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   definition: {
     color: '#04BFAD',
     fontFamily: 'Roboto-Bold',
-    fontSize: 25,
+    fontSize: 20,
     textAlign: 'center',
     marginBottom: 20,
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 10,
+    width: screenWidth * 0.6,
+  },
+  nextIcon: {
+    right: 5,
   },
   icon: {
     marginBottom: 20,
