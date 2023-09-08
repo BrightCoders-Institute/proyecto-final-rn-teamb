@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    marginBottom: 47,
   },
 });
 export default styles;
