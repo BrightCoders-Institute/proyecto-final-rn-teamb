@@ -9,6 +9,7 @@ export const PrincipalScreen = ({navigation}: NavigationType) => {
   return (
     <View style={styles.container}>
       <Logo />
+      <HeaderText header="Time to improve your english skills!" />
 
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
