@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import styles from './styles';
 //components
 import SearchWordsBar from '../../components/SearchWordsBar/SearchWordsBar';
@@ -20,21 +20,23 @@ export const SearchWords = () => {
   return (
     <View style={styles.container}>
       <SearchWordsBar wordData={handleWordData} />
-      <View style={styles.bodyContainer}>
-        {wordData ? (
-          <>
-            <HeaderText
-              header={`Definitions and pronunciation of the word "${wordData.word}"`}
-            />
-            <WordCard word={wordData.word} definition={wordData.definition} />
-          </>
-        ) : (
-          <>
-            <HeaderText header="What word you’r looking for?" />
-            <SearchImage />
-          </>
-        )}
-      </View>
+      <ScrollView>
+        <View style={styles.bodyContainer}>
+          {wordData ? (
+            <>
+              <HeaderText
+                header={`Definitions and pronunciation of the word "${wordData.word}"`}
+              />
+              <WordCard word={wordData.word} definition={wordData.definition} />
+            </>
+          ) : (
+            <>
+              <HeaderText header="What word you’r looking for?" />
+              <SearchImage />
+            </>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };
