@@ -29,7 +29,7 @@ export const ResourcesScreen: React.FC<ResourcesScreenProp> = ({
         onPress={() => navigation.navigate('PodcastScreen')}
       />
       <SectionButton
-        title={'Short stories'}
+        title={'Short Stories'}
         onPress={() => navigation.navigate('ToReadScreen')}
       />
     </View>
