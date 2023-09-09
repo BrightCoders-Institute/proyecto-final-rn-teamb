@@ -8,18 +8,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  header: {
-    fontSize: 40,
-    color: '#027373',
-    fontWeight: '600',
+  logo: {
+    marginTop: 15,
+    marginBottom: 20,
   },
-  description: {
-    fontSize: 20,
-    color: '#000000',
+  buttonsContainer: {
+    marginTop: 72,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   signUpButton: {
     backgroundColor: '#5FCDD9',
-    height: 90,
+    height: 58,
     width: 190,
     borderRadius: 10,
     justifyContent: 'center',
@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     right: -5,
   },
   signUpTitle: {
-    fontSize: 25,
     color: '#0D2038',
-    fontWeight: '600',
+    fontSize: 20,
+    fontFamily: 'Roboto-Bold',
   },
   loginButton: {
     backgroundColor: '#012030',
-    height: 90,
+    height: 58,
     width: 190,
     borderRadius: 10,
     justifyContent: 'center',
@@ -43,14 +43,9 @@ const styles = StyleSheet.create({
     left: -5,
   },
   loginTitle: {
-    fontSize: 25,
     color: '#5FCDD9',
-    fontWeight: '600',
-  },
-  buttonsContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    fontSize: 20,
+    fontFamily: 'Roboto-Bold',
   },
 });
 export default styles;
