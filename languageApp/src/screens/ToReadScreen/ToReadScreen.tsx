@@ -6,11 +6,13 @@ import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
 import {Story} from '../../interfaces/CardsInterfaces';
 import CardList from '../../components/CardList/CardList';
+import Loader from '../../components/Loader/Loader';
 //navigation
 import {NavigationProps} from '../../interfaces/NavigationInterface';
 
 export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
   const [stories, setStories] = useState<Story[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -18,9 +20,11 @@ export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
       .then(response => {
         const apiStories: Story[] = response.data;
         setStories(apiStories);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -32,7 +36,11 @@ export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
           'Reading is a powerful way to enhance your vocabulary, grammar, and reading comprehension skills!'
         }
       />
-      <CardList storyData={stories} navigation={navigation} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <CardList storyData={stories} navigation={navigation} />
+      )}
     </View>
   );
 };
