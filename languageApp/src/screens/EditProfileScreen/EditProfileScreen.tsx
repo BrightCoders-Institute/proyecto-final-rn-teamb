@@ -1,18 +1,17 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationProp } from '@react-navigation/native';
-import styles from './styles';
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { AccountActionButton } from '../../components/AccountActionButton/AccountActionButton';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
 import { setEmail, setName } from '../../store/userSlice';
-import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo function for updating user info
-import { deleteAccount } from '../../db/DeleteAccount'
-// Update the UserProfile interface to include uid
+import { updateInfo } from '../../auth/UpdateInfo';
+import { deleteAccount } from '../../db/DeleteAccount';
+import { logout } from '../../auth/LogOut';
+import styles from './styles';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+
 interface EditProfileProps {
   navigation: NavigationProp<any>;
 }
@@ -46,7 +45,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
 
       // Use the updateInfo function for updating user profiles
       try {
-        await updateInfo(formValue); // This will update the user's profile
+        await updateInfo(formValue);
         // Handle success or display any appropriate messages
       } catch (error) {
         console.error('Error updating user info:', error);
@@ -54,6 +53,16 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
       }
     },
   });
+
+  const handleDeleteAccount = async () => {
+    await deleteAccount();
+    navigation.navigate("PrincipalScreen");
+  };
+
+  const handleLogOutAccount = async () => {
+    await logout();
+    navigation.navigate("PrincipalScreen");
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -94,12 +103,16 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={formik.handleSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.loginButton} onPress={handleDeleteAccount}>
+        <Text style={styles.buttonText}>Delete</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogOutAccount}>
+        <Text style={styles.buttonText}>Log Out</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('UpdatePasswordScreen')}>
         <Text style={styles.buttonText}>Change Password</Text>
       </TouchableOpacity>
 
-      <AccountActionButton title="Logout" />
-      <AccountActionButton onPress={deleteAccount} title="Delete Account" />
     </ScrollView>
   );
 };

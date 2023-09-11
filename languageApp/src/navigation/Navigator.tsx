@@ -115,6 +115,11 @@ export const SettingsScreenNavigator = () => {
         component={UpdatePasswordScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="PrincipalScreen"
+        component={PrincipalScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
 
   );

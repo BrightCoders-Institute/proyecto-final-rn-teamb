@@ -1,11 +1,9 @@
 import auth from '@react-native-firebase/auth';
-
 export const deleteAccount = async () => {
   try {
     const user = auth().currentUser;
-
     if (user) {
-      await user.delete();
+      console.log("AWAITING FOR DELETION")
     } else {
       console.error('No user is currently signed in.');
     }
