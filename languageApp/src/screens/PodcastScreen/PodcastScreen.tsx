@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { View, ActivityIndicator, ScrollView } from 'react-native';
+=======
+
+import { View, ActivityIndicator, ScrollView } from 'react-native';
+
+>>>>>>> dba090b3f26a2d8bec691041e2b6b8a9d02fab03
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
 import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
@@ -8,7 +14,10 @@ import { useAccessToken } from '../../navigation/AccessTokenContent';
 
 export const PodcastScreen: React.FC = () => {
   const accessToken = useAccessToken();
+<<<<<<< HEAD
   console.log("accessToken is = " + accessToken)
+=======
+>>>>>>> dba090b3f26a2d8bec691041e2b6b8a9d02fab03
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
