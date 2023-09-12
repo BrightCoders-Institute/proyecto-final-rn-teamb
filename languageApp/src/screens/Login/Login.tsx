@@ -16,7 +16,7 @@ import {useFormik} from 'formik';
 import {signIn} from '../../auth/SignIn';
 import {NavigationType} from '../../../types/NavigationType';
 import {useDispatch} from 'react-redux';
-import {setAuthState, setEmail, setName} from '../../store/userSlice';
+import {setAdvance_progress, setAuthState, setBeginner_progress, setEmail, setIntermediate_progress, setName} from '../../store/userSlice';
 
 interface FormValues {
   email: string;
@@ -67,8 +67,11 @@ export const Login: React.FC = ({navigation}: NavigationType) => {
           dispatch(setAuthState('checked'));
           dispatch(setEmail(result.email));
           dispatch(setName(result.firstName));
+          // dispatch(setBeginner_progress(result.beginner_progress))
+          // dispatch(setIntermediate_progress(result.intermediate_progress))
+          // dispatch(setAdvance_progress(result.advance_progress))
         }
-      } catch (error) {}
+      } catch (error) {console.error(error)}
     },
   });
 

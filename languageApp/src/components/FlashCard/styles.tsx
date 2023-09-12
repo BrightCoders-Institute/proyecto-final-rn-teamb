@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   backText: {
     color: '#012030',
     fontFamily: 'Roboto-Bold',
-    fontSize: 32,
+    fontSize: 25,
     textAlign: 'center',
   },
 });
