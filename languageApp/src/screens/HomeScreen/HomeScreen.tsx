@@ -25,7 +25,7 @@ export const HomeScreen: React.FC<HomeProps> = ({navigation}) => {
         onPress={() => navigation.navigate('VerbsScreen')}
       />
       <SectionButton
-        title="Commun words"
+        title="Commun Words"
         onPress={() => navigation.navigate('CommunWordsScreen')}
       />
     </View>
