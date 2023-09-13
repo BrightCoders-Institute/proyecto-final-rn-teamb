@@ -19,9 +19,7 @@ import NoIcon from '../../components/Icon/NoIcon';
 export const FlashCardsScreen = ({route}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [wordData, setWordData] = useState([]);
-  const [user, setUser] = useState({})  
 
-  console.log()
   useEffect(() => {
     const verbs = async () => {
       try {
@@ -65,7 +63,9 @@ export const FlashCardsScreen = ({route}) => {
     <View style={styles.statesContainer}>
       <View style={styles.container}>
         <View style={styles.noCard}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => {
+          setWordData(wordData.slice(1))
+          }}>
             <NoIcon />
             <Text style={styles.text}>No</Text>
           </TouchableOpacity>

@@ -68,9 +68,7 @@ export const SignUpScreen: React.FC = ({navigation}: NavigationType) => {
             email: formValue.email,
             password: formValue.password,
           },
-          //navigation,
         );
-        console.log(result);
         if (result !== undefined) {
           dispatch(setAuthState('checked'));
           dispatch(setEmail(result.email));
