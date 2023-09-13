@@ -1,5 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Snackbar from 'react-native-snackbar';
 
 export const getUserInformation = async () => {
   try {
@@ -9,6 +10,13 @@ export const getUserInformation = async () => {
     return user_data;
     
 } catch (error) {
-    console.log(error);
+    Snackbar.show({
+      text: "Something were wrong try later",
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+          text: 'UNDO',
+          textColor: 'red',
+      },
+  });
 }
 };

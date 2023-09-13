@@ -1,5 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Snackbar from 'react-native-snackbar';
 
 export const updateIntermediateWordProgress = async (learned_word:number) => {
   try {
@@ -14,6 +15,13 @@ export const updateIntermediateWordProgress = async (learned_word:number) => {
     })
     
 } catch (error) {
-    console.log(error);
+    Snackbar.show({
+        text: "Something were wrong try later",
+        duration: Snackbar.LENGTH_INDEFINITE,
+        action: {
+            text: 'UNDO',
+            textColor: 'red',
+        },
+    });
 }
 };
