@@ -4,12 +4,18 @@ interface DataState {
   authState: string;
   email: string;
   name: string;
+  beginner_progress: Array<number>;
+  intermediate_progress: Array<number>;
+  advance_progress: Array<number>;
 }
 
 const initialState: DataState = {
   authState: 'Checking',
   email: '',
   name: '',
+  beginner_progress: [],
+  intermediate_progress: [],
+  advance_progress: [],
 };
 
 const userSlice = createSlice({
@@ -25,9 +31,18 @@ const userSlice = createSlice({
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    setBeginner_progress: (state, action: PayloadAction<Array<number>>) => {
+      state.beginner_progress = action.payload;
+    },
+    setIntermediate_progress: (state, action: PayloadAction<Array<number>>) => {
+      state.intermediate_progress = action.payload;
+    },
+    setAdvance_progress: (state, action: PayloadAction<Array<number>>) => {
+      state.advance_progress = action.payload;
+    },
   },
 });
 
-export const {setAuthState, setEmail, setName} = userSlice.actions;
+export const {setAuthState, setEmail, setName, setBeginner_progress, setIntermediate_progress, setAdvance_progress} = userSlice.actions;
 
 export default userSlice.reducer;

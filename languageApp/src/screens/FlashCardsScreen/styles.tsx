@@ -19,5 +19,29 @@ const styles = StyleSheet.create({
   statesContainer: {
     marginTop: 134,
   },
+  container: {
+    width: 336,
+    height: 120,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  noCard: {
+    flexDirection: 'column',
+  },
+  noYetCard: {
+    flexDirection: 'column',
+  },
+  yesCard: {
+    flexDirection: 'column',
+  },
+  text: {
+    color: '#012030',
+    fontFamily: 'Roboto-Medium',
+    fontSize: 16,
+    alignSelf: 'center',
+    marginTop: 5,
+  },
 });
 export default styles;
