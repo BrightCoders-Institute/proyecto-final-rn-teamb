@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: 329,
-    height: 80,
     backgroundColor: '#012030',
     borderRadius: 6,
     alignSelf: 'center',
@@ -30,12 +29,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Roboto-Medium',
     textAlign: 'justify',
+    marginBottom: 10,
   },
   textAuthor: {
     color: '#FFFFFF',
     fontSize: 15,
     fontFamily: 'Roboto-Regular',
     textAlign: 'justify',
+    marginBottom: 20,
   },
   icon: {
     margin: 10,
