@@ -32,7 +32,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({
         requestData.append('client_id', config.CLIENT_ID!);
         requestData.append('client_secret', config.CLIENT_SECRET!);
         const response = await axios.post(
-          config.API_URL!,
+          config.API_URL_SPOTIFY!,
           requestData.toString(),
           {
             headers: {
