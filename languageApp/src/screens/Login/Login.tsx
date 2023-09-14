@@ -67,9 +67,6 @@ export const Login: React.FC = ({navigation}: NavigationType) => {
           dispatch(setAuthState('checked'));
           dispatch(setEmail(result.email));
           dispatch(setName(result.firstName));
-          // dispatch(setBeginner_progress(result.beginner_progress))
-          // dispatch(setIntermediate_progress(result.intermediate_progress))
-          // dispatch(setAdvance_progress(result.advance_progress))
         }
       } catch (error) {console.error(error)}
     },
@@ -119,7 +116,7 @@ export const Login: React.FC = ({navigation}: NavigationType) => {
         <TouchableOpacity
           style={styles.loginButton}
           onPress={formik.handleSubmit}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.registerContainer}>

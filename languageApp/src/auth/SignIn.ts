@@ -1,6 +1,5 @@
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
-import {NavigationType} from '../../types/NavigationType';
 import firestore from '@react-native-firebase/firestore';
 
 interface SignIpInterface {
@@ -10,7 +9,6 @@ interface SignIpInterface {
 
 export const signIn = async (
   {email, password}: SignIpInterface,
-  navigation?: NavigationType,
 ) => {
   try {
     const {user} = await auth().signInWithEmailAndPassword(email, password);

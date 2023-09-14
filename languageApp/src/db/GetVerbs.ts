@@ -8,7 +8,6 @@ export const getVerbs = async (
   {level, typeOfWord}: GetWord
 ) => {
   try {
-    console.log("Se ejecuto")
     const getWord = await firestore()
     .collection('Word')
     .where("level", '==', level)

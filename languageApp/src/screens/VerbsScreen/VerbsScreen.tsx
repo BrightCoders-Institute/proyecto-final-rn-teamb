@@ -28,7 +28,6 @@ export const VerbsScreen: React.FC<VerbsProps> = ({navigation}) => {
 
   useEffect(() => {
     const getinformation = async () => {
-      console.log("Ejecucion de dispach")
       const userInformation = await getUserInformation()
       dispatch(setBeginner_progress(userInformation?.beginner_progress))
       dispatch(setIntermediate_progress(userInformation?.intermediate_progress))
