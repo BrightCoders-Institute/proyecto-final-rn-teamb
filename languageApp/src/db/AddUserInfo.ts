@@ -8,6 +8,7 @@ export const addUserInfo = async (
 ) => {
   if (name !== undefined) displayName = name;
   try {
+    console.log("THE ADD IS USER INFORING")
     const result = await firestore().collection('Users').doc(uid).set({
       firstName: displayName,
       email: email,
