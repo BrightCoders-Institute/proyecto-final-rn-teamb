@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, { useEffect, useLayoutEffect } from 'react';
+import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
@@ -16,7 +16,7 @@ interface UserProfile {
   name: string;
 }
 
-const EditProfile: React.FC = () => {
+const EditProfile: React.FC = ({navigation}) => {
   const dispatch = useDispatch();
   const {email, name}: UserProfile = useSelector(
     (state: RootState) => state.data,
@@ -36,6 +36,31 @@ const EditProfile: React.FC = () => {
       dispatch(setEmail(formValue.email));
     },
   });
+
+
+  useEffect(() => {
+    let parentNav = navigation.getParent();
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      parentNav.setOptions({
+        tabBarStyle: {display: 'none'},
+      });
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      parentNav.setOptions({
+        tabBarStyle: {
+          display: 'flex',
+          backgroundColor: '#012030',
+          height: 60,
+        },
+      });
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
 
   return (
     <View style={styles.container}>
