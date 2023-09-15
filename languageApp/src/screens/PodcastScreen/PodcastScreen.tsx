@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-
-import { View, ActivityIndicator, ScrollView } from 'react-native';
-
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
-import { PodcastEpisode } from '../../interfaces/CardsInterfaces';
-import { useAccessToken } from '../../navigation/AccessTokenContent';
+import React, {useEffect, useState} from 'react';
+import {View, ScrollView} from 'react-native';
+//components
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import Loader from '../../components/Loader/Loader';
+import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
+//navigation
+import {useAccessToken} from '../../navigation/AccessTokenContent';
 
 export const PodcastScreen: React.FC = () => {
   const accessToken = useAccessToken();
@@ -59,8 +60,14 @@ export const PodcastScreen: React.FC = () => {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View>
+        <HeaderText header={'Listening practice'} />
+        <DescriptionText
+          description={
+            'Podcasts help you learn about your favorite topics and hear different accents!'
+          }
+        />
+        <Loader />
       </View>
     );
   }
