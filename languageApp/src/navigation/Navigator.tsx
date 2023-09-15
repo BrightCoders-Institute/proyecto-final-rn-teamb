@@ -17,6 +17,7 @@ import { SignUpScreen } from '../screens/SignUp/SignUpScreen';
 import { UpdatePasswordScreen } from '../screens/UpdatePasswordScreen/UpdatePasswordScreen';
 import EditProfile from '../screens/EditProfileScreen/EditProfileScreen';
 import { SearchWords } from '../screens/SearchWords/SearchWords';
+import { FlashCardsNounsScreen } from '../screens/FlashCardsNounsScreen/FlashCardsNounsScreen';
 
 const Stack = createStackNavigator();
 
@@ -86,6 +87,15 @@ export const HomeScreenNavigator = () => {
       <Stack.Screen
         name="FlashCardsScreen"
         component={FlashCardsScreen}
+        options={{
+          headerTitle: '',
+          headerTintColor: '#5FCDD9',
+          headerShadowVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="FlashCardsNounsScreen"
+        component={FlashCardsNounsScreen}
         options={{
           headerTitle: '',
           headerTintColor: '#5FCDD9',

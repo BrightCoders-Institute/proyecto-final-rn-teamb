@@ -1,3 +1,4 @@
+import Snackbar from 'react-native-snackbar';
 import { getVerbs } from './GetVerbs';
 
 
@@ -10,6 +11,13 @@ export const addIndexToWord = async () => {
         })
     })
   } catch (error) {
-    console.error(error);
+    Snackbar.show({
+      text: "Something were wrong try later",
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+          text: 'UNDO',
+          textColor: 'red',
+      },
+  });
   }
 }
