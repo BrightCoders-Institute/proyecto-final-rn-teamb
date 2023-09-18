@@ -44,15 +44,16 @@ const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
 );
 
 const MusicList: React.FC<{data: Track[]}> = ({data}) => {
-  console.log("CARD LIST")
+  console.log('CARD LIST');
   console.log(data);
 
-
-   return (<FlatList
-    data={data}
-    renderItem={({item}) => <ListeningCard song={item} />}
-    keyExtractor={(item, index) => index.toString()}
-  />)
+  return (
+    <FlatList
+      data={data}
+      renderItem={({item}) => <ListeningCard song={item} />}
+      keyExtractor={(item, index) => index.toString()}
+    />
+  );
 };
 
 const CardList: React.FC<CardListProps & NavigationProps> = ({
