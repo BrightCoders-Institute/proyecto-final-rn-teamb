@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Linking} from 'react-native';
+import {View} from 'react-native';
 //components
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
 import CardList from '../../components/CardList/CardList';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
 import Loader from '../../components/Loader/Loader';
 //navigation
 import {useAccessToken} from '../../navigation/AccessTokenContent';
@@ -29,7 +28,6 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
 
         const songs = await Promise.all(songsPromises);
         setRandomSongs(songs);
-        // console.log(songs);
       }
 
       setIsLoading(false);
@@ -37,8 +35,6 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
       console.error('Error fetching random songs:', error);
     }
   };
-
-  console.log(getRandomSongs);
 
   const fetchRandomTrack = async (token: string) => {
     const randomLetter = generateRandomLetter();
@@ -51,7 +47,7 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
         },
       },
     );
-    // console.log('API Request:', response);
+
     return response;
   };
 
@@ -63,7 +59,6 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
 
   useEffect(() => {
     getRandomSongs(44);
-    console.log(getRandomSongs);
   }, [accessToken]);
 
   if (isLoading) {
@@ -90,25 +85,6 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
           'Listening to music is a fantastic way to learn new words and their pronunciation!'
         }
       />
-      {/* <ScrollView>
-        {randomSongs.map((song, index) => (
-
-          <ListeningCard
-            key={index}
-            name={song.name}
-            author={song.artists[0].name}
-            imageUri={song.album.images[0].url}
-            onPress={() => {
-              console.log("Button pressed");
-              Linking.openURL(song.external_urls.spotify).catch((err) =>
-                console.error("Error opening URL: ", err)
-              );
-            }}
-
-
-          />
-        ))}
-      </ScrollView> */}
       <CardList musicData={randomSongs} navigation={navigation} />
     </View>
   );
