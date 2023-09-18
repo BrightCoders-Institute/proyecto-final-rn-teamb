@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: 114,
+    height: hp("15%"),
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   },
   face: {
     backgroundColor: '#012030',
-    width: 335,
-    height: 114,
+    width: wp("90%"),
+    height: hp("16%"),
     borderRadius: 6,
     justifyContent: 'center',
   },
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   back: {
     backgroundColor: '#5FCDD9',
-    width: 335,
-    height: 114,
+    width: wp("90%"),
+    height: hp("16%"),
     borderRadius: 6,
     justifyContent: 'center',
   },
@@ -36,5 +36,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
   },
+  icon: {
+    color: 'grey',
+    left: wp("38%")
+  }
 });
 export default styles;

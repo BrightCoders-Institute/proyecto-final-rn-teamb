@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text} from 'react-native';
 import FlipCard from 'react-native-flip-card';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface FlashCardProps {
   faceText: string;
@@ -9,6 +10,7 @@ interface FlashCardProps {
 }
 
 export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {
+  const [flip, setFlip] = useState(false)
   return (
     <View style={styles.container}>
       <FlipCard
@@ -16,7 +18,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {
         perspective={1000}
         flipHorizontal={true}
         flipVertical={false}
-        flip={false}
+        flip={flip}
         clickable={true}>
         <View style={styles.face}>
           <Text style={styles.faceText}>{faceText}</Text>
@@ -26,6 +28,8 @@ export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {
           <Text style={styles.backText}>{backText}</Text>
         </View>
       </FlipCard>
+      
+      <Icon name='sync' size={40} style={styles.icon} onPress={() => setFlip(!flip)}/>
     </View>
   );
 };

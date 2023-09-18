@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
+import React, { useEffect, useLayoutEffect } from 'react';
+import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
@@ -22,7 +22,7 @@ interface UserProfile {
   name: string;
 }
 
-const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
+const EditProfile: React.FC = ({navigation}) => {
   const dispatch = useDispatch();
   const { email, name }: UserProfile = useSelector(
     (state: RootState) => state.data
@@ -54,6 +54,31 @@ const EditProfile: React.FC<EditProfileProps> = ({ navigation }) => {
       }
     },
   });
+
+
+  useEffect(() => {
+    let parentNav = navigation.getParent();
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      parentNav.setOptions({
+        tabBarStyle: {display: 'none'},
+      });
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      parentNav.setOptions({
+        tabBarStyle: {
+          display: 'flex',
+          backgroundColor: '#012030',
+          height: 60,
+        },
+      });
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
 
   return (
     <ScrollView style={styles.container}>
