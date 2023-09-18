@@ -42,7 +42,7 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
 
 const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
   <FlatList
-    style={{marginBottom: 70}}
+    style={{marginBottom: 50}}
     data={data}
     renderItem={({item}) => <PodcastCard podcast={item} />}
     keyExtractor={(item, index) => index.toString()}
