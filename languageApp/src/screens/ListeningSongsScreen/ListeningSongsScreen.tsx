@@ -78,7 +78,7 @@ export const ListeningSongsScreen: React.FC<NavigationProps> = ({
   }
 
   return (
-    <View>
+    <View style={{marginBottom: 80}}>
       <HeaderText header={'Listening practice'} />
       <DescriptionText
         description={

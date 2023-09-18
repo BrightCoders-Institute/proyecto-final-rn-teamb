@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 //components
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
 import Loader from '../../components/Loader/Loader';
 import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
 import CardList from '../../components/CardList/CardList';
@@ -77,23 +76,13 @@ export const PodcastScreen: React.FC<NavigationProps> = ({navigation}) => {
   }
 
   return (
-    <View>
+    <View style={{marginBottom: 100}}>
       <HeaderText header={'Podcast Listening practice'} />
       <DescriptionText
         description={
           'Podcasts help you learn about your favorite topics and hear different accents!'
         }
       />
-      {/* <ScrollView>
-        {randomEpisodes.map((episode, index) => (
-          <ListeningCard
-            key={index}
-            name={episode.name}
-            author={episode.publisher}
-            imageUri={episode.images[0].url}
-          />
-        ))}
-      </ScrollView> */}
       <CardList podcastData={randomEpisodes} navigation={navigation} />
     </View>
   );
