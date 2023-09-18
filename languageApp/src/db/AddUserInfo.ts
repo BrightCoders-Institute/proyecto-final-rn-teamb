@@ -1,6 +1,7 @@
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {Alert} from 'react-native';
+import Snackbar from 'react-native-snackbar';
 
 export const addUserInfo = async (
   {uid, displayName, email}: FirebaseAuthTypes.User,
@@ -8,6 +9,7 @@ export const addUserInfo = async (
 ) => {
   if (name !== undefined) displayName = name;
   try {
+    console.log("THE ADD IS USER INFORING")
     const result = await firestore().collection('Users').doc(uid).set({
       firstName: displayName,
       email: email,
@@ -19,6 +21,13 @@ export const addUserInfo = async (
     }
     return getUser.data();
   } catch (error) {
-    console.log(error);
+    Snackbar.show({
+      text: "Something were wrong try later",
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+          text: 'UNDO',
+          textColor: 'red',
+      },
+  });
   }
 };

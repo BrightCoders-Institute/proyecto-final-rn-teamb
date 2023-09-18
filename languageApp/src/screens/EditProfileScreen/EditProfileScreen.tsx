@@ -1,15 +1,21 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
-import {HeaderText} from '../../components/HeaderText/HeaderText';
-import {AccountActionButton} from '../../components/AccountActionButton/AccountActionButton';
+import { HeaderText } from '../../components/HeaderText/HeaderText';
+import { AccountActionButton } from '../../components/AccountActionButton/AccountActionButton';
 import * as Yup from 'yup';
-import {useFormik} from 'formik';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/reducers';
-import {setEmail, setName} from '../../store/userSlice';
+import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
+import { setEmail, setName } from '../../store/userSlice';
+import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo function for updating user info
+
+// Update the UserProfile interface to include uid
+interface EditProfileProps {
+  navigation: NavigationProp<any>;
+}
 
 interface UserProfile {
   email: string;
@@ -18,22 +24,34 @@ interface UserProfile {
 
 const EditProfile: React.FC = ({navigation}) => {
   const dispatch = useDispatch();
-  const {email, name}: UserProfile = useSelector(
-    (state: RootState) => state.data,
+  const { email, name }: UserProfile = useSelector(
+    (state: RootState) => state.data
   );
+
   const initialValues: UserProfile = {
     email: email,
     name: name,
   };
 
-  // TODO: change values in database
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object(validationSchema()),
     validateOnChange: true,
-    onSubmit: formValue => {
+    onSubmit: async (formValue) => {
+      // Update the user profile with new values
       dispatch(setName(formValue.name));
       dispatch(setEmail(formValue.email));
+
+      console.log("FORM VALUE", formValue)
+
+      // Use the updateInfo function for updating user profiles
+      try {
+        await updateInfo(formValue); // This will update the user's profile
+        // Handle success or display any appropriate messages
+      } catch (error) {
+        console.error('Error updating user info:', error);
+        // Handle the error, show a message, etc.
+      }
     },
   });
 
@@ -63,11 +81,11 @@ const EditProfile: React.FC = ({navigation}) => {
 
 
   return (
-    <View style={styles.container}>
-      <HeaderText header="Edit Profile" />
+    <ScrollView style={styles.container}>
+
       <View style={styles.pfpContainer}>
         <View>
-          <Icon name="person-circle" size={100} style={{color: 'black'}} />
+          <Icon name="person-circle" size={100} style={{ color: 'black' }} />
         </View>
         <View style={styles.pfpLabels}>
           <Text style={styles.pfpLabel}>Email</Text>
@@ -82,7 +100,7 @@ const EditProfile: React.FC = ({navigation}) => {
         style={styles.input}
         placeholder="E-mail"
         value={formik.values.email}
-        onChangeText={text => formik.setFieldValue('email', text)}
+        onChangeText={(text) => formik.setFieldValue('email', text)}
       />
       {formik.errors.email && (
         <Text style={styles.errorText}>{formik.errors.email}</Text>
@@ -92,19 +110,22 @@ const EditProfile: React.FC = ({navigation}) => {
         style={styles.input}
         placeholder="Name"
         value={formik.values.name}
-        onChangeText={text => formik.setFieldValue('name', text)}
+        onChangeText={(text) => formik.setFieldValue('name', text)}
       />
       {formik.errors.name && (
         <Text style={styles.errorText}>{formik.errors.name}</Text>
       )}
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={formik.handleSubmit}>
+
+      <TouchableOpacity style={styles.loginButton} onPress={formik.handleSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('UpdatePasswordScreen')}>
+        <Text style={styles.buttonText}>Change Password</Text>
+      </TouchableOpacity>
+
       <AccountActionButton title="Logout" />
       <AccountActionButton title="Delete Account" />
-    </View>
+    </ScrollView>
   );
 };
 

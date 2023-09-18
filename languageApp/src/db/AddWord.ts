@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import Snackbar from 'react-native-snackbar';
 
 interface WordInterface {
     name: string;
@@ -20,6 +21,13 @@ export const addWord = async (
         typeOfWord
     });
   } catch (error) {
-    console.log(error);
+    Snackbar.show({
+      text: "Something were wrong try later",
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+          text: 'UNDO',
+          textColor: 'red',
+      },
+  });
   }
 };

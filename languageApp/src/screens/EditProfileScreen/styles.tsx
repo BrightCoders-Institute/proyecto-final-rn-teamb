@@ -7,7 +7,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   editProfileTitle: {
     fontSize: 24,
     fontWeight: 'bold',
