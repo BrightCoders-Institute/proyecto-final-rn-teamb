@@ -6,10 +6,12 @@ import {DescriptionText} from '../../components/DescriptionText/DescriptionText'
 import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
 import Loader from '../../components/Loader/Loader';
 import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
+import CardList from '../../components/CardList/CardList';
 //navigation
 import {useAccessToken} from '../../navigation/AccessTokenContent';
+import {NavigationProps} from '../../interfaces/NavigationInterface';
 
-export const PodcastScreen: React.FC = () => {
+export const PodcastScreen: React.FC<NavigationProps> = ({navigation}) => {
   const accessToken = useAccessToken();
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -67,7 +69,9 @@ export const PodcastScreen: React.FC = () => {
             'Podcasts help you learn about your favorite topics and hear different accents!'
           }
         />
-        <Loader />
+        <View style={{marginTop: 20}}>
+          <Loader />
+        </View>
       </View>
     );
   }
@@ -80,7 +84,7 @@ export const PodcastScreen: React.FC = () => {
           'Podcasts help you learn about your favorite topics and hear different accents!'
         }
       />
-      <ScrollView>
+      {/* <ScrollView>
         {randomEpisodes.map((episode, index) => (
           <ListeningCard
             key={index}
@@ -89,7 +93,8 @@ export const PodcastScreen: React.FC = () => {
             imageUri={episode.images[0].url}
           />
         ))}
-      </ScrollView>
+      </ScrollView> */}
+      <CardList podcastData={randomEpisodes} navigation={navigation} />
     </View>
   );
 };
