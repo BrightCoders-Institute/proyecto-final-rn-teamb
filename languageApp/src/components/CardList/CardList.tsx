@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 //components
 import {ToReadCard} from '../ToReadCard/ToReadCard';
 import {ListeningCard} from '../ListeningCard/ListeningCard';
@@ -40,20 +40,20 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
 );
 
 const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
-  <FlatList
-    data={data}
-    renderItem={({item}) => <ListeningCard {...item} />}
-    keyExtractor={(item, index) => index.toString()}
-  />
+  <Text>song.name</Text>
 );
 
-const MusicList: React.FC<{data: Track[]}> = ({data}) => (
-  <FlatList
+const MusicList: React.FC<{data: Track[]}> = ({data}) => {
+  console.log("CARD LIST")
+  console.log(data);
+
+
+   return (<FlatList
     data={data}
-    renderItem={({item}) => <ListeningCard {...item} />}
+    renderItem={({item}) => <ListeningCard song={item} />}
     keyExtractor={(item, index) => index.toString()}
-  />
-);
+  />)
+};
 
 const CardList: React.FC<CardListProps & NavigationProps> = ({
   musicData,
