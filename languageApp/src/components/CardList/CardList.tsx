@@ -41,7 +41,7 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
 );
 
 const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
-  <View style={{marginBottom: 80}}>
+  <View style={{marginBottom: 100}}>
     <FlatList
       data={data}
       renderItem={({item}) => <PodcastCard podcast={item} />}
@@ -51,7 +51,7 @@ const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
 );
 
 const MusicList: React.FC<{data: Track[]}> = ({data}) => (
-  <View style={{marginBottom: 80}}>
+  <View style={{marginBottom: 100}}>
     <FlatList
       data={data}
       renderItem={({item}) => <ListeningCard song={item} />}
