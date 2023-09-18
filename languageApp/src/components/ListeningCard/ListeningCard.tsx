@@ -7,15 +7,17 @@ interface ListeningCardProps {
   name?: string;
   author?: string;
   imageUri?: string;
+  onPress?: () => void;
 }
 
 export const ListeningCard: React.FC<ListeningCardProps> = ({
   name,
   author,
   imageUri,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image source={{uri: imageUri}} style={styles.image} />
