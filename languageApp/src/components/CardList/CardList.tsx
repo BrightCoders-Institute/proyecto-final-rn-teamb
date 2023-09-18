@@ -22,28 +22,26 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
   data,
   navigation,
 }) => (
-  <View style={{marginBottom: 40}}>
-    <FlatList
-      data={data}
-      renderItem={({item}) => (
-        <ToReadCard
-          {...item}
-          onPress={() =>
-            navigation.navigate('StoryScreen', {
-              title: item.title,
-              author: item.author,
-              story: item.story,
-            })
-          }
-        />
-      )}
-      keyExtractor={(item, index) => index.toString()}
-    />
-  </View>
+  <FlatList
+    data={data}
+    renderItem={({item}) => (
+      <ToReadCard
+        {...item}
+        onPress={() =>
+          navigation.navigate('StoryScreen', {
+            title: item.title,
+            author: item.author,
+            story: item.story,
+          })
+        }
+      />
+    )}
+    keyExtractor={(item, index) => index.toString()}
+  />
 );
 
 const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
-  <View style={{marginBottom: 40}}>
+  <View style={{marginBottom: 80}}>
     <FlatList
       data={data}
       renderItem={({item}) => <PodcastCard podcast={item} />}
@@ -53,7 +51,7 @@ const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
 );
 
 const MusicList: React.FC<{data: Track[]}> = ({data}) => (
-  <View style={{marginBottom: 40}}>
+  <View style={{marginBottom: 80}}>
     <FlatList
       data={data}
       renderItem={({item}) => <ListeningCard song={item} />}
