@@ -42,6 +42,7 @@ const ToReadList: React.FC<{data: Story[]} & NavigationProps> = ({
 
 const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
   <FlatList
+    style={{marginBottom: 100}}
     data={data}
     renderItem={({item}) => <PodcastCard podcast={item} />}
     keyExtractor={(item, index) => index.toString()}
@@ -50,6 +51,7 @@ const PodcastList: React.FC<{data: PodcastEpisode[]}> = ({data}) => (
 
 const MusicList: React.FC<{data: Track[]}> = ({data}) => (
   <FlatList
+    style={{marginBottom: 100}}
     data={data}
     renderItem={({item}) => <ListeningCard song={item} />}
     keyExtractor={(item, index) => index.toString()}
