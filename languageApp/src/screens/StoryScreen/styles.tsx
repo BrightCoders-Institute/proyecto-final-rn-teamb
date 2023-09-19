@@ -10,19 +10,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  upPartContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: screenWidth * 0.8,
-  },
-  favoritesButton: {
-    position: 'absolute',
-    right: 0,
-    top: 45,
-  },
   storyContainer: {
     width: screenWidth,
-    height: screenHeight * 0.53,
+    height: screenHeight * 0.6,
     backgroundColor: '#EFF0EF',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -42,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     fontFamily: 'Roboto-Regular',
     fontSize: 15,
-    marginBottom: 25,
+    marginBottom: 80,
   },
 });
 export default styles;

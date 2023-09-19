@@ -2,12 +2,12 @@ import React from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import styles from './styles';
 
-interface AccountActionButtonProps {
+interface BlueButtonProps {
   title: string;
   onPress?: () => void;
 }
 
-export const AccountActionButton: React.FC<AccountActionButtonProps> = ({
+export const BlueButton: React.FC<BlueButtonProps> = ({
   title,
   onPress,
 }) => {

@@ -1,9 +1,19 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {View, TextInput, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import {NavigationProp} from '@react-navigation/native';
+//components
 import styles from './styles';
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {BlueButton} from '../../components/BlueButton/BlueButton';
+import Snackbar from 'react-native-snackbar';
 
-export const UpdatePasswordScreen: React.FC = () => {
+interface NavigateProps {
+  navigation: NavigationProp<any>;
+}
+
+export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -22,34 +32,51 @@ export const UpdatePasswordScreen: React.FC = () => {
         return;
       }
 
-      // Prompt the user for their current password
       const currentPass = currentPassword;
 
-      // Reauthenticate the user with their current password
       const emailCred = auth.EmailAuthProvider.credential(
         user.email || '',
         currentPass,
       );
       await user.reauthenticateWithCredential(emailCred);
 
-      // Update the user's password with the new one
       await user.updatePassword(newPassword);
 
-      Alert.alert('Password updated successfully');
+      Snackbar.show({
+        text: 'Password updated successfully',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: '#012030',
+        action: {
+          text: 'OK',
+          textColor: '#5FCDD9',
+          onPress: () => {
+            navigation.navigate('EditProfile');
+          },
+        },
+      });
     } catch (error) {
       console.error('Error updating password:', error);
-      Alert.alert('Error updating password. Please try again.');
+
+      Snackbar.show({
+        text: 'Error updating password. Please try again.',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: '#012030',
+        action: {
+          text: 'OK',
+          textColor: '#7C0000',
+          onPress: () => {
+            navigation.navigate('EditProfile');
+          },
+        },
+      });
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Change Password</Text>
-      <Text style={styles.subtitle}>
-        Enter your current and new password below:
-      </Text>
+      <HeaderText header="Change Password" />
 
-      <Text style={styles.label}>Current Password</Text>
+      <DescriptionText description="Current Password" />
       <TextInput
         style={styles.input}
         placeholder="Current Password"
@@ -58,7 +85,7 @@ export const UpdatePasswordScreen: React.FC = () => {
         onChangeText={text => setCurrentPassword(text)}
       />
 
-      <Text style={styles.label}>New Password</Text>
+      <DescriptionText description="New Password" />
       <TextInput
         style={styles.input}
         placeholder="New Password"
@@ -67,7 +94,7 @@ export const UpdatePasswordScreen: React.FC = () => {
         onChangeText={text => setNewPassword(text)}
       />
 
-      <Text style={styles.label}>Confirm New Password</Text>
+      <DescriptionText description="Confirm New Password" />
       <TextInput
         style={styles.input}
         placeholder="Confirm New Password"
@@ -76,11 +103,7 @@ export const UpdatePasswordScreen: React.FC = () => {
         onChangeText={text => setConfirmNewPassword(text)}
       />
 
-      <TouchableOpacity
-        style={styles.changePasswordButton}
-        onPress={handleChangePassword}>
-        <Text style={styles.changePasswordButtonText}>Change Password</Text>
-      </TouchableOpacity>
+      <BlueButton title="Change Password" onPress={handleChangePassword} />
     </View>
   );
 };
