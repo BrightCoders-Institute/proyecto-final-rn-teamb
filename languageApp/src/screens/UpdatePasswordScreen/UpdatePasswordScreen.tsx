@@ -4,6 +4,8 @@ import Snackbar from 'react-native-snackbar';
 import auth from '@react-native-firebase/auth';
 import styles from './styles';
 import {NavigationProp} from '@react-navigation/native';
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
 
 interface NavigateProps {
   navigation: NavigationProp<any>;
@@ -41,6 +43,7 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
       Snackbar.show({
         text: 'Password updated successfully',
         duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: '#012030',
         action: {
           text: 'OK',
           textColor: '#5FCDD9',
@@ -55,6 +58,7 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
       Snackbar.show({
         text: 'Error updating password. Please try again.',
         duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: '#012030',
         action: {
           text: 'OK',
           textColor: '#7C0000',
@@ -68,12 +72,10 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Change Password</Text>
-      <Text style={styles.subtitle}>
-        Enter your current and new password below:
-      </Text>
+      <HeaderText header="Change Password" />
+      <DescriptionText description="Enter your current and new password below:" />
 
-      <Text style={styles.label}>Current Password</Text>
+      <DescriptionText description="Current Password" />
       <TextInput
         style={styles.input}
         placeholder="Current Password"
@@ -82,7 +84,7 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
         onChangeText={text => setCurrentPassword(text)}
       />
 
-      <Text style={styles.label}>New Password</Text>
+      <DescriptionText description="New Password" />
       <TextInput
         style={styles.input}
         placeholder="New Password"
@@ -91,7 +93,7 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
         onChangeText={text => setNewPassword(text)}
       />
 
-      <Text style={styles.label}>Confirm New Password</Text>
+      <DescriptionText description="Confirm New Password" />
       <TextInput
         style={styles.input}
         placeholder="Confirm New Password"

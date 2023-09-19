@@ -7,16 +7,11 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
   },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  editProfileTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center', // Center the title horizontally
-    marginBottom: 20,
-  },
+  // headerText: {
+  //   fontSize: 24,
+  //   fontWeight: 'bold',
+  // },
+
   pfpContainer: {
     flexDirection: 'row',
     alignItems: 'center',

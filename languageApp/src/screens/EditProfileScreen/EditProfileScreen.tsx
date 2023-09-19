@@ -1,18 +1,20 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import {View, Text, TextInput, TouchableOpacity, Keyboard, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
+//components
 import { HeaderText } from '../../components/HeaderText/HeaderText';
 import { AccountActionButton } from '../../components/AccountActionButton/AccountActionButton';
+//navigation
+import { NavigationProp } from '@react-navigation/native';
+//redux
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
 import { setEmail, setName } from '../../store/userSlice';
-import { updateInfo } from '../../auth/UpdateInfo'; // Import the updateInfo function for updating user info
+import { updateInfo } from '../../auth/UpdateInfo';
 
-// Update the UserProfile interface to include uid
 interface EditProfileProps {
   navigation: NavigationProp<any>;
 }
@@ -22,7 +24,7 @@ interface UserProfile {
   name: string;
 }
 
-const EditProfile: React.FC = ({navigation}) => {
+const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
   const dispatch = useDispatch();
   const { email, name }: UserProfile = useSelector(
     (state: RootState) => state.data
@@ -38,19 +40,17 @@ const EditProfile: React.FC = ({navigation}) => {
     validationSchema: Yup.object(validationSchema()),
     validateOnChange: true,
     onSubmit: async (formValue) => {
-      // Update the user profile with new values
+
       dispatch(setName(formValue.name));
       dispatch(setEmail(formValue.email));
 
       console.log("FORM VALUE", formValue)
 
-      // Use the updateInfo function for updating user profiles
       try {
-        await updateInfo(formValue); // This will update the user's profile
-        // Handle success or display any appropriate messages
+        await updateInfo(formValue);
+
       } catch (error) {
         console.error('Error updating user info:', error);
-        // Handle the error, show a message, etc.
       }
     },
   });
@@ -83,7 +83,7 @@ const EditProfile: React.FC = ({navigation}) => {
 
       <View style={styles.pfpContainer}>
         <View>
-          <Icon name="person-circle" size={100} style={{ color: 'black' }} />
+          <Icon name="person-circle" size={100} style={{ color: '#012030' }} />
         </View>
         <View style={styles.pfpLabels}>
           <Text style={styles.pfpLabel}>Email</Text>
@@ -121,7 +121,7 @@ const EditProfile: React.FC = ({navigation}) => {
         <Text style={styles.buttonText}>Change Password</Text>
       </TouchableOpacity>
 
-      <AccountActionButton title="Logout" />
+      <AccountActionButton title="Log Out" />
       <AccountActionButton title="Delete Account" />
     </ScrollView>
   );
