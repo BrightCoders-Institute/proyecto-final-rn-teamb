@@ -5,18 +5,20 @@ import Snackbar from 'react-native-snackbar';
 export const getUserInformation = async () => {
   try {
     const current_user = auth().currentUser;
-    const result = await firestore().collection('Users').doc(current_user?.uid).get();
+    const result = await firestore()
+      .collection('Users')
+      .doc(current_user?.uid)
+      .get();
     const user_data = await result.data();
     return user_data;
-    
-} catch (error) {
+  } catch (error) {
     Snackbar.show({
-      text: "Something were wrong try later",
+      text: 'Something were wrong try later',
       duration: Snackbar.LENGTH_INDEFINITE,
       action: {
-          text: 'UNDO',
-          textColor: 'red',
+        text: 'UNDO',
+        textColor: 'red',
       },
-  });
-}
+    });
+  }
 };

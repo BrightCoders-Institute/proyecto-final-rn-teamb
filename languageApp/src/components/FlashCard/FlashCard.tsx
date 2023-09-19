@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import FlipCard from 'react-native-flip-card';
 import styles from './styles';
@@ -10,7 +10,7 @@ interface FlashCardProps {
 }
 
 export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {
-  const [flip, setFlip] = useState(false)
+  const [flip, setFlip] = useState(false);
   return (
     <View style={styles.container}>
       <FlipCard
@@ -28,8 +28,13 @@ export const FlashCard: React.FC<FlashCardProps> = ({faceText, backText}) => {
           <Text style={styles.backText}>{backText}</Text>
         </View>
       </FlipCard>
-      
-      <Icon name='sync' size={40} style={styles.icon} onPress={() => setFlip(!flip)}/>
+
+      <Icon
+        name="sync"
+        size={40}
+        style={styles.icon}
+        onPress={() => setFlip(!flip)}
+      />
     </View>
   );
 };

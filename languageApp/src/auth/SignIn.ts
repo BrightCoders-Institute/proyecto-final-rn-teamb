@@ -7,18 +7,12 @@ interface SignIpInterface {
   password: string;
 }
 
-export const signIn = async (
-  {email, password}: SignIpInterface,
-) => {
+export const signIn = async ({email, password}: SignIpInterface) => {
   try {
     const {user} = await auth().signInWithEmailAndPassword(email, password);
     const result = await firestore().collection('Users').doc(user.uid).get();
-    if (result.exists) {
-      Alert.alert('Login');
-    }
     return result.data();
   } catch (error) {
-    console.log(error);
     if (error.code === 'auth/user-not-found') {
       Alert.alert('There is no user record corresponding to this identifier');
     }

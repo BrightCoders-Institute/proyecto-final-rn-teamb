@@ -9,25 +9,25 @@ export const addUserInfo = async (
 ) => {
   if (name !== undefined) displayName = name;
   try {
-    console.log("THE ADD IS USER INFORING")
     const result = await firestore().collection('Users').doc(uid).set({
       firstName: displayName,
       email: email,
       uid: uid,
+      beginner_progress: [],
+      intermediate_progress: [],
+      advance_progress: [],
+      nouns_progress: [],
     });
     const getUser = await firestore().collection('Users').doc(uid).get();
-    if (getUser.exists) {
-      Alert.alert('User added');
-    }
     return getUser.data();
   } catch (error) {
     Snackbar.show({
-      text: "Something were wrong try later",
+      text: 'Something were wrong try later',
       duration: Snackbar.LENGTH_INDEFINITE,
       action: {
-          text: 'UNDO',
-          textColor: 'red',
+        text: 'UNDO',
+        textColor: 'red',
       },
-  });
+    });
   }
 };

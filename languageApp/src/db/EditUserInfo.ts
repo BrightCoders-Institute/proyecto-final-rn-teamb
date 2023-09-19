@@ -1,11 +1,12 @@
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth'; // Import the auth function
+import Snackbar from 'react-native-snackbar';
 
 // Modify the editUserInfo function to accept the new email and password
 export const editUserInfo = async (
-  { uid, displayName, email }: FirebaseAuthTypes.User,
+  {uid, displayName, email}: FirebaseAuthTypes.User,
   name?: string,
   newEmail?: string,
   newPassword?: string, // Add a parameter for the new password
@@ -13,10 +14,9 @@ export const editUserInfo = async (
   if (name !== undefined) displayName = name;
   try {
     const currentUser = auth().currentUser;
-    console.log('Current User:', currentUser); // Add this line to log the current user
 
     // Create an object to update in Firestore
-    const updateData: { [key: string]: string } = {
+    const updateData: {[key: string]: string} = {
       firstName: displayName,
     };
 
@@ -37,6 +37,13 @@ export const editUserInfo = async (
 
     return updatedUser.data();
   } catch (error) {
-    console.log(error);
+    Snackbar.show({
+      text: 'Something were wrong try later',
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+        text: 'UNDO',
+        textColor: 'red',
+      },
+    });
   }
 };

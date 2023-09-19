@@ -16,7 +16,15 @@ import {useFormik} from 'formik';
 import {signIn} from '../../auth/SignIn';
 import {NavigationType} from '../../../types/NavigationType';
 import {useDispatch} from 'react-redux';
-import {setAdvance_progress, setAuthState, setBeginner_progress, setEmail, setIntermediate_progress, setName} from '../../store/userSlice';
+import {
+  setAdvance_progress,
+  setAuthState,
+  setBeginner_progress,
+  setEmail,
+  setIntermediate_progress,
+  setName,
+} from '../../store/userSlice';
+import Snackbar from 'react-native-snackbar';
 
 interface FormValues {
   email: string;
@@ -68,7 +76,16 @@ export const Login: React.FC = ({navigation}: NavigationType) => {
           dispatch(setEmail(result.email));
           dispatch(setName(result.firstName));
         }
-      } catch (error) {console.error(error)}
+      } catch (error) {
+        Snackbar.show({
+          text: 'Something were wrong try later',
+          duration: Snackbar.LENGTH_INDEFINITE,
+          action: {
+            text: 'UNDO',
+            textColor: 'red',
+          },
+        });
+      }
     },
   });
 
