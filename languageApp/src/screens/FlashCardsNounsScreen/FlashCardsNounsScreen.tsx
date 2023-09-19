@@ -29,7 +29,6 @@ export const FlashCardsNounsScreen = () => {
 
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  const {nouns_progress} = useSelector((state: RootState) => state.data);
 
   useEffect(() => {
     const getinformation = async () => {
@@ -55,7 +54,7 @@ export const FlashCardsNounsScreen = () => {
         setWordData(words);
         setIsLoading(false);
         dispatch(setNouns_progress(userInformation?.nouns_progress));
-        setSessonLearnedWords(nouns_progress.length);
+        setSessonLearnedWords(userInformation?.nouns_progress.length);
       } catch (error) {
         Snackbar.show({
           text: 'Something were wrong try later',
