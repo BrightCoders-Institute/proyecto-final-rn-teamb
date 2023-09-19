@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
+//components
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import Loader from '../../components/Loader/Loader';
+import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
+import CardList from '../../components/CardList/CardList';
+//navigation
+import {useAccessToken} from '../../navigation/AccessTokenContent';
+import {NavigationProps} from '../../interfaces/NavigationInterface';
 
-import { View, ActivityIndicator, ScrollView } from 'react-native';
-
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
-import { PodcastEpisode } from '../../interfaces/CardsInterfaces';
-import { useAccessToken } from '../../navigation/AccessTokenContent';
-
-export const PodcastScreen: React.FC = () => {
+export const PodcastScreen: React.FC<NavigationProps> = ({navigation}) => {
   const accessToken = useAccessToken();
   const [randomEpisodes, setRandomEpisodes] = useState<PodcastEpisode[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -59,30 +61,29 @@ export const PodcastScreen: React.FC = () => {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View>
+        <HeaderText header={'Listening practice'} />
+        <DescriptionText
+          description={
+            'Podcasts help you learn about your favorite topics and hear different accents!'
+          }
+        />
+        <View style={{marginTop: 20}}>
+          <Loader />
+        </View>
       </View>
     );
   }
 
   return (
-    <View>
+    <View style={{marginBottom: 100}}>
       <HeaderText header={'Podcast Listening practice'} />
       <DescriptionText
         description={
           'Podcasts help you learn about your favorite topics and hear different accents!'
         }
       />
-      <ScrollView>
-        {randomEpisodes.map((episode, index) => (
-          <ListeningCard
-            key={index}
-            name={episode.name}
-            author={episode.publisher}
-            imageUri={episode.images[0].url}
-          />
-        ))}
-      </ScrollView>
+      <CardList podcastData={randomEpisodes} navigation={navigation} />
     </View>
   );
 };
