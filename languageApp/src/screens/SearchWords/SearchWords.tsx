@@ -25,7 +25,7 @@ export const SearchWords = () => {
           {wordData ? (
             <>
               <HeaderText
-                header={`Definitions and pronunciation of the word "${wordData.word}"`}
+                header={`Definitions of the word "${wordData.word}"`}
               />
               <WordCard word={wordData.word} definition={wordData.definition} />
             </>

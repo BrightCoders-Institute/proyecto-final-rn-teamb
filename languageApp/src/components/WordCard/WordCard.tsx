@@ -38,14 +38,6 @@ export const WordCard: React.FC<WordCardProps> = ({word, definition}) => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity>
-        <Icon
-          style={styles.icon}
-          name={'volume-high'}
-          size={40}
-          color="#5FCDD9"
-        />
-      </TouchableOpacity>
     </View>
   );
 };

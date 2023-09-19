@@ -23,21 +23,19 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.7,
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 35,
   },
   definition: {
     color: '#04BFAD',
     fontFamily: 'Roboto-Bold',
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 20,
+
     marginLeft: 10,
     width: screenWidth * 0.6,
   },
   nextIcon: {
     right: 5,
-  },
-  icon: {
-    marginBottom: 20,
   },
 });
 export default styles;
