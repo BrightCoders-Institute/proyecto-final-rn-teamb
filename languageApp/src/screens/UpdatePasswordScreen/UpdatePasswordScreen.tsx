@@ -75,7 +75,6 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <HeaderText header="Change Password" />
-      <DescriptionText description="Enter your current and new password below:" />
 
       <DescriptionText description="Current Password" />
       <TextInput
