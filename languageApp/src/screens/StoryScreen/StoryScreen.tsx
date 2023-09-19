@@ -29,15 +29,6 @@ export const StoryScreen: React.FC<StoryProps> = ({route}) => {
     <View style={styles.container}>
       <View style={styles.upPartContainer}>
         <ReadingImage />
-        <TouchableOpacity
-          style={styles.favoritesButton}
-          onPress={handleMarkRead}>
-          <Icon
-            name={markRead ? 'eye' : 'eye-outline'}
-            size={40}
-            color="#04BFAD"
-          />
-        </TouchableOpacity>
       </View>
       <View style={styles.storyContainer}>
         <ScrollView>

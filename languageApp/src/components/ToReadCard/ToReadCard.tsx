@@ -32,13 +32,6 @@ export const ToReadCard: React.FC<ToReadCardProps> = ({
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.author}>{author}</Text>
           </View>
-          <TouchableOpacity onPress={handleMarkRead}>
-            <Icon
-              name={markRead ? 'eye' : 'eye-outline'}
-              size={25}
-              color="#04BFAD"
-            />
-          </TouchableOpacity>
         </View>
 
         <View style={styles.moralContainer}>
