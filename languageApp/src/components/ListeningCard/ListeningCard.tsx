@@ -9,12 +9,9 @@ interface ListeningCardProps {
 }
 
 export const ListeningCard: React.FC<ListeningCardProps> = ({song}) => {
-  console.log(song);
-
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log('Button pressed');
         Linking.openURL(song.external_urls.spotify).catch(err =>
           console.error('Error opening URL: ', err),
         );

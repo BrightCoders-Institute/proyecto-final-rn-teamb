@@ -9,12 +9,9 @@ interface PodcastCardProps {
 }
 
 export const PodcastCard: React.FC<PodcastCardProps> = ({podcast}) => {
-  console.log(podcast);
-
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log('Button pressed');
         Linking.openURL(podcast.external_urls.spotify).catch(err =>
           console.error('Error opening URL: ', err),
         );
