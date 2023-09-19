@@ -5,6 +5,7 @@ import styles from './styles';
 //components
 import {AccountActionButton} from '../../components/AccountActionButton/AccountActionButton';
 import {BlueButton} from '../../components/BlueButton/BlueButton';
+import {LogOut} from '../../auth/LogOut';
 //navigation
 import {NavigationProp} from '@react-navigation/native';
 //redux
@@ -45,10 +46,9 @@ const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
 
   const handleLogout = async () => {
     try {
-      await auth().signOut();
-      navigation.navigate('PrincipalScreen');
+      await LogOut({email, password: '', navigation});
     } catch (error) {
-      console.error('Error logging out:', error);
+      console.error('Logout Error:', error);
     }
   };
 
