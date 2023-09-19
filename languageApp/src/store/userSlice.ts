@@ -7,7 +7,7 @@ interface DataState {
   beginner_progress: Array<number>;
   intermediate_progress: Array<number>;
   advance_progress: Array<number>;
-  nouns_progress: Array<number>;
+  nouns_progress: Array<string>;
 }
 
 const initialState: DataState = {
@@ -42,12 +42,20 @@ const userSlice = createSlice({
     setAdvance_progress: (state, action: PayloadAction<Array<number>>) => {
       state.advance_progress = action.payload;
     },
-    setNouns_progress: (state, action: PayloadAction<Array<number>>) => {
-      state.advance_progress = action.payload;
+    setNouns_progress: (state, action: PayloadAction<Array<string>>) => {
+      state.nouns_progress = action.payload;
     },
   },
 });
 
-export const {setAuthState, setEmail, setName, setBeginner_progress, setIntermediate_progress, setAdvance_progress, setNouns_progress} = userSlice.actions;
+export const {
+  setAuthState,
+  setEmail,
+  setName,
+  setBeginner_progress,
+  setIntermediate_progress,
+  setAdvance_progress,
+  setNouns_progress,
+} = userSlice.actions;
 
 export default userSlice.reducer;

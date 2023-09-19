@@ -1,5 +1,6 @@
 import auth from '@react-native-firebase/auth';
-import { editUserInfo } from '../db/EditUserInfo'; // Import the new editUserInfo function
+import {editUserInfo} from '../db/EditUserInfo'; // Import the new editUserInfo function
+import Snackbar from 'react-native-snackbar';
 
 interface UpdateInfoInterface {
   name: string;
@@ -7,7 +8,7 @@ interface UpdateInfoInterface {
   uid: string; // Add UID to the interface for editing user info
 }
 
-export const updateInfo = async ({ name, email, uid }: UpdateInfoInterface) => {
+export const updateInfo = async ({name, email, uid}: UpdateInfoInterface) => {
   try {
     const user = auth().currentUser;
 
@@ -19,7 +20,13 @@ export const updateInfo = async ({ name, email, uid }: UpdateInfoInterface) => {
       return updatedUser;
     }
   } catch (error) {
-    console.error('Error updating user info:', error);
-    // Handle the error, show a message, etc.
+    Snackbar.show({
+      text: 'Something were wrong try later',
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+        text: 'UNDO',
+        textColor: 'red',
+      },
+    });
   }
 };

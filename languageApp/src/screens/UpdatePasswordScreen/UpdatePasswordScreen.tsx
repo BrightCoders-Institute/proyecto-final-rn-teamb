@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import styles from './styles'
+import styles from './styles';
 
 export const UpdatePasswordScreen: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -26,7 +26,10 @@ export const UpdatePasswordScreen: React.FC = () => {
       const currentPass = currentPassword;
 
       // Reauthenticate the user with their current password
-      const emailCred = auth.EmailAuthProvider.credential(user.email || '', currentPass);
+      const emailCred = auth.EmailAuthProvider.credential(
+        user.email || '',
+        currentPass,
+      );
       await user.reauthenticateWithCredential(emailCred);
 
       // Update the user's password with the new one
@@ -42,7 +45,9 @@ export const UpdatePasswordScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Change Password</Text>
-      <Text style={styles.subtitle}>Enter your current and new password below:</Text>
+      <Text style={styles.subtitle}>
+        Enter your current and new password below:
+      </Text>
 
       <Text style={styles.label}>Current Password</Text>
       <TextInput
