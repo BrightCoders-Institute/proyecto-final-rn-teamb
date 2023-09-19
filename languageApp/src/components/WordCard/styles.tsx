@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 35,
     marginLeft: 10,
     width: screenWidth * 0.6,
   },
