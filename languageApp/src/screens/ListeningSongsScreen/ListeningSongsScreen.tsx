@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {View, ActivityIndicator, ScrollView} from 'react-native';
+import {View} from 'react-native';
+//components
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
-import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
-import {Track} from '../../interfaces/CardsInterfaces';
+import CardList from '../../components/CardList/CardList';
+import Loader from '../../components/Loader/Loader';
+//navigation
 import {useAccessToken} from '../../navigation/AccessTokenContent';
-import Snackbar from 'react-native-snackbar';
-export const ListeningSongsScreen: React.FC = () => {
+import {NavigationProps} from '../../interfaces/NavigationInterface';
+import {Track} from '../../interfaces/CardsInterfaces';
+
+export const ListeningSongsScreen: React.FC<NavigationProps> = ({
+  navigation,
+}) => {
   const accessToken = useAccessToken();
   const [randomSongs, setRandomSongs] = useState<Track[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,14 +32,7 @@ export const ListeningSongsScreen: React.FC = () => {
 
       setIsLoading(false);
     } catch (error) {
-      Snackbar.show({
-        text: 'Something were wrong try later',
-        duration: Snackbar.LENGTH_INDEFINITE,
-        action: {
-          text: 'UNDO',
-          textColor: 'red',
-        },
-      });
+      console.error('Error fetching random songs:', error);
     }
   };
 
@@ -48,45 +47,45 @@ export const ListeningSongsScreen: React.FC = () => {
         },
       },
     );
+
     return response;
   };
 
   const generateRandomLetter = () => {
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
     const randomIndex: number = Math.floor(Math.random() * alphabet.length);
     return alphabet[randomIndex];
   };
 
   useEffect(() => {
-    getRandomSongs(44); // number of songs to show
+    getRandomSongs(44);
   }, [accessToken]);
 
   if (isLoading) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View>
+        <HeaderText header={'Listening practice'} />
+        <DescriptionText
+          description={
+            'Listening to music is a fantastic way to learn new words and their pronunciation!'
+          }
+        />
+        <View style={{marginTop: 20}}>
+          <Loader />
+        </View>
       </View>
     );
   }
 
   return (
-    <View>
+    <View style={{marginBottom: 80}}>
       <HeaderText header={'Listening practice'} />
       <DescriptionText
         description={
           'Listening to music is a fantastic way to learn new words and their pronunciation!'
         }
       />
-      <ScrollView>
-        {randomSongs.map((song, index) => (
-          <ListeningCard
-            key={index}
-            name={song.name}
-            author={song.artists[0].name}
-            imageUri={song.album.images[0].url}
-          />
-        ))}
-      </ScrollView>
+      <CardList musicData={randomSongs} navigation={navigation} />
     </View>
   );
 };

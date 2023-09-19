@@ -2,30 +2,27 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image, Linking} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Track} from '../../interfaces/CardsInterfaces';
+import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
 
-interface ListeningCardProps {
-  song: Track;
+interface PodcastCardProps {
+  podcast: PodcastEpisode;
 }
 
-export const ListeningCard: React.FC<ListeningCardProps> = ({song}) => {
+export const PodcastCard: React.FC<PodcastCardProps> = ({podcast}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        Linking.openURL(song.external_urls.spotify).catch(err =>
+        Linking.openURL(podcast.external_urls.spotify).catch(err =>
           console.error('Error opening URL: ', err),
         );
       }}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{uri: song.album.images[0].url}}
-            style={styles.image}
-          />
+          <Image source={{uri: podcast.images[0].url}} style={styles.image} />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.textName}>{song.name}</Text>
-          <Text style={styles.textAuthor}>{song.artists[0].name}</Text>
+          <Text style={styles.textName}>{podcast.name}</Text>
+          <Text style={styles.textAuthor}>{podcast.publisher}</Text>
         </View>
         <Icon style={styles.icon} name="spotify" size={30} color="#5FCDD9" />
       </View>

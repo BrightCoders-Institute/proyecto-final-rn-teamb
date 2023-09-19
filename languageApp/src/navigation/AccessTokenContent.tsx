@@ -1,16 +1,27 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import axios from 'axios';
 import config from 'react-native-config';
 
 interface AccessTokenContextType {
   accessToken: string | null;
 }
+interface AccessTokenProviderProps {
+  children: ReactNode;
+}
 
 const AccessTokenContext = createContext<AccessTokenContextType | undefined>(
   undefined,
 );
 
-export const AccessTokenProvider: React.FC = ({children}) => {
+export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({
+  children,
+}) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,7 +32,7 @@ export const AccessTokenProvider: React.FC = ({children}) => {
         requestData.append('client_id', config.CLIENT_ID!);
         requestData.append('client_secret', config.CLIENT_SECRET!);
         const response = await axios.post(
-          config.API_URL!,
+          config.API_URL_SPOTIFY!,
           requestData.toString(),
           {
             headers: {
