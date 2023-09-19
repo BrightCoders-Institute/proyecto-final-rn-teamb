@@ -9,6 +9,7 @@ import CardList from '../../components/CardList/CardList';
 import Loader from '../../components/Loader/Loader';
 //navigation
 import {NavigationProps} from '../../interfaces/NavigationInterface';
+import Snackbar from 'react-native-snackbar';
 
 export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
   const [stories, setStories] = useState<Story[]>([]);
@@ -23,7 +24,14 @@ export const ToReadScreen: React.FC<NavigationProps> = ({navigation}) => {
         setIsLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        Snackbar.show({
+          text: 'Something were wrong try later',
+          duration: Snackbar.LENGTH_INDEFINITE,
+          action: {
+            text: 'UNDO',
+            textColor: 'red',
+          },
+        });
         setIsLoading(false);
       });
   }, []);

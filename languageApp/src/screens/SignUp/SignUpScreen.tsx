@@ -62,13 +62,11 @@ export const SignUpScreen: React.FC = ({navigation}: NavigationType) => {
     validateOnChange: true,
     onSubmit: async formValue => {
       try {
-        const result = await signup(
-          {
-            name: formValue.name,
-            email: formValue.email,
-            password: formValue.password,
-          },
-        );
+        const result = await signup({
+          name: formValue.name,
+          email: formValue.email,
+          password: formValue.password,
+        });
         if (result !== undefined) {
           dispatch(setAuthState('checked'));
           dispatch(setEmail(result.email));

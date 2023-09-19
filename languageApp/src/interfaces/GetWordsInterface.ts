@@ -1,4 +1,4 @@
 export interface GetWord {
-    level: string;
-    typeOfWord: string;
+  level: string;
+  typeOfWord: string;
 }

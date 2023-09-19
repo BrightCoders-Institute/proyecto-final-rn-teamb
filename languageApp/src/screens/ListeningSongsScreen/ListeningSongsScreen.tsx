@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator, ScrollView } from 'react-native';
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
-import { Track } from '../../interfaces/CardsInterfaces';
-import { useAccessToken } from '../../navigation/AccessTokenContent';
+import React, {useEffect, useState} from 'react';
+import {View, ActivityIndicator, ScrollView} from 'react-native';
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import {Track} from '../../interfaces/CardsInterfaces';
+import {useAccessToken} from '../../navigation/AccessTokenContent';
+import Snackbar from 'react-native-snackbar';
 export const ListeningSongsScreen: React.FC = () => {
   const accessToken = useAccessToken();
   const [randomSongs, setRandomSongs] = useState<Track[]>([]);
@@ -13,7 +14,7 @@ export const ListeningSongsScreen: React.FC = () => {
   const getRandomSongs = async (count: number) => {
     try {
       if (accessToken) {
-        const songsPromises = Array.from({ length: count }, async () => {
+        const songsPromises = Array.from({length: count}, async () => {
           const response = await fetchRandomTrack(accessToken);
           const data = await response.json();
           return data.tracks.items[0];
@@ -25,7 +26,14 @@ export const ListeningSongsScreen: React.FC = () => {
 
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching random songs:', error);
+      Snackbar.show({
+        text: 'Something were wrong try later',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        action: {
+          text: 'UNDO',
+          textColor: 'red',
+        },
+      });
     }
   };
 
@@ -38,14 +46,13 @@ export const ListeningSongsScreen: React.FC = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     return response;
   };
 
-
   const generateRandomLetter = () => {
-    const alphabet: string = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     const randomIndex: number = Math.floor(Math.random() * alphabet.length);
     return alphabet[randomIndex];
   };
@@ -56,7 +63,7 @@ export const ListeningSongsScreen: React.FC = () => {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );

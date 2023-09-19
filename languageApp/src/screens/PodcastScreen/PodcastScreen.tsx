@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { View, ActivityIndicator, ScrollView } from 'react-native';
+import {View, ActivityIndicator, ScrollView} from 'react-native';
 
-import { HeaderText } from '../../components/HeaderText/HeaderText';
-import { DescriptionText } from '../../components/DescriptionText/DescriptionText';
-import { ListeningCard } from '../../components/ListeningCard/ListeningCard';
-import { PodcastEpisode } from '../../interfaces/CardsInterfaces';
-import { useAccessToken } from '../../navigation/AccessTokenContent';
+import {HeaderText} from '../../components/HeaderText/HeaderText';
+import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {ListeningCard} from '../../components/ListeningCard/ListeningCard';
+import {PodcastEpisode} from '../../interfaces/CardsInterfaces';
+import {useAccessToken} from '../../navigation/AccessTokenContent';
+import Snackbar from 'react-native-snackbar';
 
 export const PodcastScreen: React.FC = () => {
   const accessToken = useAccessToken();
@@ -39,7 +40,14 @@ export const PodcastScreen: React.FC = () => {
       setRandomEpisodes(episodes);
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching random episodes:', error);
+      Snackbar.show({
+        text: 'Something were wrong try later',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        action: {
+          text: 'UNDO',
+          textColor: 'red',
+        },
+      });
     }
   };
 
@@ -59,7 +67,7 @@ export const PodcastScreen: React.FC = () => {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );

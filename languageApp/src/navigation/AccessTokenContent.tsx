@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import config from 'react-native-config';
 
@@ -6,9 +6,11 @@ interface AccessTokenContextType {
   accessToken: string | null;
 }
 
-const AccessTokenContext = createContext<AccessTokenContextType | undefined>(undefined);
+const AccessTokenContext = createContext<AccessTokenContextType | undefined>(
+  undefined,
+);
 
-export const AccessTokenProvider: React.FC = ({ children }) => {
+export const AccessTokenProvider: React.FC = ({children}) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const AccessTokenProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AccessTokenContext.Provider value={{ accessToken }}>
+    <AccessTokenContext.Provider value={{accessToken}}>
       {children}
     </AccessTokenContext.Provider>
   );

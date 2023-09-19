@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
 //components
@@ -11,7 +11,7 @@ interface HomeProps {
   navigation: NavigationProp<any>;
 }
 
-export const HomeScreen: React.FC<HomeProps> = ({navigation}) => {  
+export const HomeScreen: React.FC<HomeProps> = ({navigation}) => {
   return (
     <View>
       <Text style={styles.greetings}>Hi there!</Text>
