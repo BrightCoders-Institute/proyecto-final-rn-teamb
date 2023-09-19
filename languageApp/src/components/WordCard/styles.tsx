@@ -36,8 +36,5 @@ const styles = StyleSheet.create({
   nextIcon: {
     right: 5,
   },
-  icon: {
-    marginBottom: 20,
-  },
 });
 export default styles;
