@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Keyboard, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { NavigationProp } from '@react-navigation/native';
 import styles from './styles';
@@ -55,7 +55,6 @@ const EditProfile: React.FC = ({navigation}) => {
     },
   });
 
-
   useEffect(() => {
     let parentNav = navigation.getParent();
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -78,7 +77,6 @@ const EditProfile: React.FC = ({navigation}) => {
       hideSubscription.remove();
     };
   }, []);
-
 
   return (
     <ScrollView style={styles.container}>
