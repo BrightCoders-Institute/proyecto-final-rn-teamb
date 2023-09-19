@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import auth from '@react-native-firebase/auth';
-import styles from './styles'
+import styles from './styles';
+import {NavigationProp} from '@react-navigation/native';
 
-export const UpdatePasswordScreen: React.FC = () => {
+interface NavigateProps {
+  navigation: NavigationProp<any>;
+}
+
+export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -22,27 +28,50 @@ export const UpdatePasswordScreen: React.FC = () => {
         return;
       }
 
-      // Prompt the user for their current password
       const currentPass = currentPassword;
 
-      // Reauthenticate the user with their current password
-      const emailCred = auth.EmailAuthProvider.credential(user.email || '', currentPass);
+      const emailCred = auth.EmailAuthProvider.credential(
+        user.email || '',
+        currentPass,
+      );
       await user.reauthenticateWithCredential(emailCred);
 
-      // Update the user's password with the new one
       await user.updatePassword(newPassword);
 
-      Alert.alert('Password updated successfully');
+      Snackbar.show({
+        text: 'Password updated successfully',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        action: {
+          text: 'OK',
+          textColor: '#5FCDD9',
+          onPress: () => {
+            navigation.navigate('EditProfile');
+          },
+        },
+      });
     } catch (error) {
       console.error('Error updating password:', error);
-      Alert.alert('Error updating password. Please try again.');
+
+      Snackbar.show({
+        text: 'Error updating password. Please try again.',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        action: {
+          text: 'OK',
+          textColor: '#7C0000',
+          onPress: () => {
+            navigation.navigate('EditProfile');
+          },
+        },
+      });
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Change Password</Text>
-      <Text style={styles.subtitle}>Enter your current and new password below:</Text>
+      <Text style={styles.subtitle}>
+        Enter your current and new password below:
+      </Text>
 
       <Text style={styles.label}>Current Password</Text>
       <TextInput
