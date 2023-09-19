@@ -12,6 +12,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/reducers';
 import {setEmail, setName} from '../../store/userSlice';
 import {useFormik} from 'formik';
+//firebase
+import auth from '@react-native-firebase/auth';
 
 interface EditProfileProps {
   navigation: NavigationProp<any>;
@@ -41,6 +43,15 @@ const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
     },
   });
 
+  const handleLogout = async () => {
+    try {
+      await auth().signOut();
+      navigation.navigate('PrincipalScreen');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Icon name="person-circle" size={100} style={{color: '#012030'}} />
@@ -54,7 +65,7 @@ const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
         title="Change Password"
         onPress={() => navigation.navigate('UpdatePasswordScreen')}
       />
-      <AccountActionButton title="Log Out" />
+      <AccountActionButton title="Log Out" onPress={handleLogout} />
     </View>
   );
 };
