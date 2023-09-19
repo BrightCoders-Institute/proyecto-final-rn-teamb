@@ -13,8 +13,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/reducers';
 import {setEmail, setName} from '../../store/userSlice';
 import {useFormik} from 'formik';
-//firebase
-import auth from '@react-native-firebase/auth';
 
 interface EditProfileProps {
   navigation: NavigationProp<any>;
@@ -46,7 +44,7 @@ const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
 
   const handleLogout = async () => {
     try {
-      await LogOut({email, password: '', navigation});
+      await LogOut({navigation});
       navigation.navigate('PrincipalScreen');
     } catch (error) {
       console.error('Logout Error:', error);

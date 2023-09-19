@@ -1,26 +1,18 @@
-import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 import {NavigationProp} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 interface SignOutInterface {
-  email: string;
-  password: string;
   navigation: NavigationProp<any>;
 }
 
-export const LogOut = async ({
-  email,
-  password,
-  navigation,
-}: SignOutInterface) => {
+export const LogOut = async ({navigation}: SignOutInterface) => {
   try {
-    const {user} = await auth().signInWithEmailAndPassword(email, password);
-    const result = await firestore().collection('Users').doc(user.uid).get();
-    if (result.exists) {
+    const currentUser = auth().currentUser;
+    if (currentUser) {
       await auth().signOut();
       navigation.navigate('PrincipalScreen');
-      console.log('Sign Out', 'You have been successfully signed out.');
+    } else {
     }
   } catch (error) {
     console.error('Sign Out Error:', error);
