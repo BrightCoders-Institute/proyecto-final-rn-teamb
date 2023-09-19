@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
-import Snackbar from 'react-native-snackbar';
+import {View, TextInput, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import styles from './styles';
 import {NavigationProp} from '@react-navigation/native';
+//components
+import styles from './styles';
 import {HeaderText} from '../../components/HeaderText/HeaderText';
 import {DescriptionText} from '../../components/DescriptionText/DescriptionText';
+import {BlueButton} from '../../components/BlueButton/BlueButton';
+import Snackbar from 'react-native-snackbar';
 
 interface NavigateProps {
   navigation: NavigationProp<any>;
@@ -102,11 +104,7 @@ export const UpdatePasswordScreen: React.FC<NavigateProps> = ({navigation}) => {
         onChangeText={text => setConfirmNewPassword(text)}
       />
 
-      <TouchableOpacity
-        style={styles.changePasswordButton}
-        onPress={handleChangePassword}>
-        <Text style={styles.changePasswordButtonText}>Change Password</Text>
-      </TouchableOpacity>
+      <BlueButton title="Change Password" onPress={handleChangePassword} />
     </View>
   );
 };
