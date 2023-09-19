@@ -47,6 +47,7 @@ const EditProfile: React.FC<EditProfileProps> = ({navigation}) => {
   const handleLogout = async () => {
     try {
       await LogOut({email, password: '', navigation});
+      navigation.navigate('PrincipalScreen');
     } catch (error) {
       console.error('Logout Error:', error);
     }

@@ -19,19 +19,12 @@ interface StoryProps {
 
 export const StoryScreen: React.FC<StoryProps> = ({route}) => {
   const {story, author, title} = route.params;
-  const [markRead, setMarkRead] = useState(false);
-
-  const handleMarkRead = () => {
-    setMarkRead(!markRead);
-  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.upPartContainer}>
         <ReadingImage />
-      </View>
       <View style={styles.storyContainer}>
-        <ScrollView>
+        <ScrollView style={{marginBottom:80}}>
           <HeaderText header={title} />
           <Text style={styles.author}>{author}</Text>
           <Text style={styles.story}>{story}</Text>
