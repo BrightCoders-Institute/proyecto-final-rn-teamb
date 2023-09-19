@@ -13,7 +13,7 @@ export const AccountActionButton: React.FC<AccountActionButtonProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.actionButton}>
+      <TouchableOpacity style={styles.actionButton} onPress={onPress}>
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     </View>
